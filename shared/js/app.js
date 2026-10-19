@@ -92,12 +92,12 @@
 
   /* ---------- Derive progress from module records ---------- */
   const PDF_CHAPTERS = [
-    [4, 8],
-    [9, 14],
-    [15, 22],
-    [23, 28],
-    [29, 36],
-    [37, 47],
+    [4, 16],
+    [17, 23],
+    [24, 30],
+    [31, 37],
+    [38, 44],
+    [45, 47],
   ];
   function compute() {
     const labs = ["speaking", "listening", "reading", "writing"].map((s) => [s, obj(get("smh.lab." + s + ".v1", {}))]),

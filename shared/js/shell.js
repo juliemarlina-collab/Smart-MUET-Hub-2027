@@ -58,6 +58,18 @@
   const html = document.documentElement;
   html.classList.add('smh-shell');
   if (type === 'activity') html.classList.add('smh-focus');
+  /* paper colour, the same as the eBook chapters: Listening cobalt · Speaking teal · Reading orange · Writing magenta */
+  const paper = (id.match(/listening|speaking|reading|writing/) || [])[0];
+  if (paper) html.dataset.paper = paper;
+  if (/^(v1|v2|mock1)-/.test(id)) html.classList.add('smh-paperpage');
+  /* pages that open with the handwritten greeting share one hero style */
+  const markHero = () => {
+    const hero = !!document.querySelector('main :is(.hello,.red-hello,.handwritten)');
+    if (hero) html.classList.add('smh-hero');
+    const h1 = document.querySelector('main h1');
+    if (h1 && (hero || type !== 'activity')) h1.classList.add('smh-h1');
+  };
+  markHero();
 
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const link = (text, path, cls) => { const a = el('a', cls, text); a.href = root + path; return a; };
@@ -149,7 +161,7 @@
   const skip = el('a', 'smh-skip', 'Skip to content');
   if (mainTarget) { if (!mainTarget.id) mainTarget.id = 'main'; skip.href = '#' + mainTarget.id; }
   else skip.href = '#';
-  if (oldSkip) oldSkip.remove();
+  if (oldSkip) oldSkip.hidden = true; // keep it: some pages update its link
   body.prepend(skip, header);
   if (band) header.after(band);
   if (footer) {
