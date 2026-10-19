@@ -14,10 +14,10 @@
     return n;
   };
   const SKILLS = {
-    listening: { name: "Listening", tech: "CLUE", lab: "05-practice/listening-lab.html", guide: "03-guides/listening.html", page: 9 },
-    speaking: { name: "Speaking", tech: "PREP", lab: "05-practice/speaking-lab.html", guide: "03-guides/speaking.html", page: 15 },
-    reading: { name: "Reading", tech: "SCAN", lab: "05-practice/reading-lab.html", guide: "03-guides/reading.html", page: 23 },
-    writing: { name: "Writing", tech: "PEEL", lab: "05-practice/writing-lab.html", guide: "03-guides/writing.html", page: 29 },
+    listening: { name: "Listening", tech: "CLUE", lab: "05-practice/listening-lab.html", guide: "03-guides/listening.html", page: 17 },
+    speaking: { name: "Speaking", tech: "PREP", lab: "05-practice/speaking-lab.html", guide: "03-guides/speaking.html", page: 24 },
+    reading: { name: "Reading", tech: "SCAN", lab: "05-practice/reading-lab.html", guide: "03-guides/reading.html", page: 31 },
+    writing: { name: "Writing", tech: "PEEL", lab: "05-practice/writing-lab.html", guide: "03-guides/writing.html", page: 38 },
   };
 
   /* ---------- Items ---------- */
