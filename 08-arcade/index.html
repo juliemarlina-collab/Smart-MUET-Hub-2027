@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fffaf1">
+<title>Arcade · Smart MUET Arcade</title>
+<link rel="icon" href="../shared/assets/logo.svg">
+<link rel="stylesheet" href="../shared/styles/tokens.css">
+<link rel="stylesheet" href="../05-practice/css/lab.css">
+<link rel="stylesheet" href="css/arcade.css">
+<link rel="stylesheet" href="../shared/styles/navigation.css">
+<script defer src="js/arcade-core.js"></script>
+<script defer src="js/lobby.js"></script>
+<script defer src="../shared/js/app.js"></script><script defer src="../shared/js/navigation.js"></script>
+</head>
+<body data-page-id="arcade" data-app-root="../" class="arcade-page">
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <a class="brand" href="../index.html"><img src="../shared/assets/logo.svg" alt=""><span>Smart MUET<small>ARCADE</small></span></a>
+  <nav aria-label="Arcade links"><a href="../05-practice/index.html">Vault ↗</a><a href="../06-progress/index.html">Me ↗</a><button id="motion" type="button" aria-pressed="false">Pause motion</button></nav>
+</header>
+<main id="main" class="arcade-main">
+  <section class="lobby-hero">
+    <div>
+      <span class="eyebrow">ARCADE / QUICK GAMES / 3 MINUTES EACH</span>
+      <p class="hello">Play to practise.</p>
+      <h1>Move your hand.<br><span>Sharpen your band.</span></h1>
+      <p class="lead">Short games that train one MUET skill at a time. Tap to play anywhere, or turn on camera mode and play with hand gestures.</p>
+    </div>
+    <aside class="today paper" aria-labelledby="today-title">
+      <span class="eyebrow">TODAY</span>
+      <h3 id="today-title"><b id="xp-left">3</b> XP rounds left</h3>
+      <p class="small">Each finished round earns 10 XP, up to 3 rounds a day. The Labs and Vault earn more: games are the warm-up, not the workout.</p>
+    </aside>
+  </section>
+  <div class="game-cards">
+    <article class="game-card gc-grab">
+      <span class="status">PINCH · WRITING + SPEAKING</span>
+      <h2>Grab &amp; Throw</h2>
+      <p>Throw sentences into the Point, Explain, Example and Link buckets to build a paragraph. Speaking rounds use PREP.</p>
+      <p class="best" data-best="grab-throw">No score yet</p>
+      <a class="button primary" href="grab-throw.html">Play Grab &amp; Throw ▸</a>
+    </article>
+    <article class="game-card gc-slice">
+      <span class="status">POINT · LISTENING + READING</span>
+      <h2>Air Slice</h2>
+      <p>Slice the right answer as the options fly past, and learn the name of every trap you hit.</p>
+      <p class="best" data-best="air-slice">No score yet</p>
+      <a class="button primary" href="air-slice.html">Play Air Slice ▸</a>
+    </article>
+    <article class="game-card gc-boss">
+      <span class="status">FIST · ALL FOUR PAPERS · BOSS BATTLE</span>
+      <h2>Monster Punch</h2>
+      <p>Punch the monster holding the right answer to beat the boss of each Vault level: Jerebu, Kalut and Gerhana.</p>
+      <p class="best" data-best="monster-punch">No score yet</p>
+      <a class="button primary" href="monster-punch.html">Play Monster Punch ▸</a>
+    </article>
+  </div>
+  <section class="privacy paper" aria-labelledby="privacy-title">
+    <span class="eyebrow">CAMERA MODE, IN PLAIN WORDS</span>
+    <h3 id="privacy-title">Your camera stays yours.</h3>
+    <ul>
+      <li>The hand tracker runs inside your browser. No video or photo is recorded, saved or uploaded.</li>
+      <li>Camera mode is optional. Every game works fully by tapping, dragging or keyboard.</li>
+      <li>The tracker downloads once (about 8 MB). Good light and a plain background help it see your hand.</li>
+      <li>Missed questions go to <a href="../05-practice/review.html">Review again</a>, just like in the Labs.</li>
+    </ul>
+  </section>
+</main>
+<footer>English Language Unit · Politeknik Port Dickson · Personal bests only, no class leaderboard.</footer>
+</body>
+</html>
