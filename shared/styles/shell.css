@@ -1,0 +1,106 @@
+/* Smart MUET Hub · shared shell (header, page band, footer, type scale).
+   Loaded on every page by shared/js/navigation.js. One frame for all pages; content inside stays page-specific. */
+
+@font-face{font-family:Poppins;src:url('../fonts/poppins-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:Poppins;src:url('../fonts/poppins-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Poppins;src:url('../fonts/poppins-800.woff2') format('woff2');font-weight:800;font-display:swap}
+/* Headings across the Hub use Manrope by name; point the bold weights at Poppins so every page shares one display face. */
+@font-face{font-family:Manrope;src:url('../fonts/poppins-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Manrope;src:url('../fonts/poppins-800.woff2') format('woff2');font-weight:800;font-display:swap}
+
+:root{
+  --s-paper:#f6f4ef; --s-card:#fff; --s-ink:#16141c; --s-soft:#5d5866; --s-line:#e4e0d8;
+  --s-cobalt:#3542e8; --s-yellow:#ffd21f; --s-plum:#8a0e9c; --s-mint:#00d9b5; --s-pink:#ff3d8b; --s-orange:#ff7a2f;
+  --s-display:Poppins,Manrope,"Segoe UI",Arial,sans-serif; --s-body:DM,"DM Sans",Arial,sans-serif;
+  --s-gutter:max(16px,4vw);
+  /* frame colours · light is the default; "dark" is a learner setting (Theme button in the header) */
+  --f-bar:#ffffff; --f-fg:#16141c; --f-soft:#6a6573; --f-line:#16141c2e; --f-edge:#e4e0d8;
+  --f-on:#3542e8; --f-on-fg:#ffffff; --f-hover:#16141c;
+  --f-foot:#3542e8; --f-foot-fg:#ffffff; --f-foot-soft:#dfe2ff; --f-foot-line:#ffffff33;
+  --f-hero:#ece7ff; --f-hero-fg:#16141c; --f-hero-soft:#4f4a5c; --f-accent:#3542e8;
+  --f-tile:#ffffff; --f-tile-line:#d9d2f0; --f-chip-line:#16141c2e;
+}
+html[data-smh-theme="dark"]{
+  --f-bar:#16141c; --f-fg:#ffffff; --f-soft:#bdb8c8; --f-line:#ffffff3d; --f-edge:#16141c;
+  --f-on:#ffffff; --f-on-fg:#16141c; --f-hover:#ffffff;
+  --f-foot:#16141c; --f-foot-fg:#ffffff; --f-foot-soft:#bdb8c8; --f-foot-line:#ffffff1f;
+  --f-hero:#16141c; --f-hero-fg:#ffffff; --f-hero-soft:#d6d2df; --f-accent:#ffd21f;
+  --f-tile:#ffffff12; --f-tile-line:#ffffff24; --f-chip-line:#ffffff2e;
+}
+
+/* ---------- readable type everywhere ---------- */
+html.smh-shell body{font-size:17px;line-height:1.65}
+html.smh-shell main p:not([class*="small"]):not([class*="eyebrow"]):not([class*="note"]),
+html.smh-shell main li,
+html.smh-shell main label{font-size:max(16px,1em)}
+html.smh-shell .eyebrow,html.smh-shell [class*="eyebrow"]{font-size:max(12px,1em)!important;letter-spacing:.12em}
+html.smh-shell .small,html.smh-shell small{font-size:max(13px,.85em)}
+
+/* ---------- hide the old per-page frames ---------- */
+html.smh-shell body>header:not(.smh-header),html.smh-shell .smh-location,html.smh-shell body>footer:not(.smh-footer){display:none!important}
+html.smh-shell.smh-focus .smh-nav{display:none!important}
+html.smh-shell.smh-focus body{padding-bottom:0!important}
+
+[hidden]{display:none!important}
+html.smh-shell{scroll-padding-top:150px}
+/* neutralise page-level element rules (header{…}, footer{…}, nav{…}) so the shell looks the same everywhere */
+html.smh-shell .smh-header,html.smh-shell .smh-footer,html.smh-shell .smh-band{display:block!important;margin:0;padding:0!important;border-radius:0!important;box-shadow:none!important;width:auto!important;max-width:none!important;height:auto!important;text-align:left!important}
+html.smh-shell .smh-header{border:0!important}
+html.smh-shell .smh-footer{margin-top:48px}
+html.smh-shell .smh-menu,html.smh-shell .smh-crumbs{position:static!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;width:auto!important;height:auto!important}
+
+/* ---------- header ---------- */
+.smh-header{position:sticky;top:0;z-index:150;background:var(--f-bar);color:var(--f-fg);box-shadow:0 1px 0 var(--f-edge)!important;font-family:var(--s-body)}
+.smh-header .in{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px var(--s-gutter)}
+.smh-logo{display:flex;align-items:center;gap:10px;color:var(--f-fg)!important;text-decoration:none!important;margin-right:auto;min-width:0}
+.smh-logo img{width:38px;height:38px;flex:none;background:#fff;border-radius:50%;padding:3px;box-sizing:border-box}
+.smh-logo b{font:800 18px/1.05 var(--s-display);letter-spacing:-.02em;white-space:nowrap}
+.smh-logo small{display:block;font:700 11px/1.3 var(--s-body);letter-spacing:.14em;text-transform:uppercase;color:var(--f-soft);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.smh-menu{display:flex;gap:6px}
+.smh-menu a{color:var(--f-fg)!important;text-decoration:none!important;border:1px solid var(--f-line);border-radius:99px;padding:9px 16px;font:700 15px/1 var(--s-body);white-space:nowrap}
+.smh-menu a:hover{border-color:var(--f-hover)}
+.smh-menu a[aria-current="page"]{background:var(--f-on);color:var(--f-on-fg)!important;border-color:var(--f-on)}
+.smh-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--s-yellow);color:var(--s-ink)!important;text-decoration:none!important;border-radius:99px;padding:0 18px;font:700 15px/1 var(--s-body);white-space:nowrap}
+.smh-cta:hover{filter:brightness(1.06);box-shadow:0 0 0 2px var(--f-hover)}
+.smh-tools{display:flex;gap:6px;align-items:center}
+.smh-tools>*{color:var(--s-ink)!important;background:#ffffffb3!important;border:1px solid #16141c33!important;border-radius:99px!important;min-height:40px;padding:0 12px!important;font:700 13px/1 var(--s-body)!important;display:inline-flex!important;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.smh-exit{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--f-line);border-radius:99px;padding:0 16px;color:var(--f-fg)!important;text-decoration:none!important;font:700 15px/1 var(--s-body);white-space:nowrap}
+.smh-exit:hover{border-color:var(--f-hover)}
+.smh-theme{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;border:1px solid var(--f-line);border-radius:99px;background:none;color:var(--f-fg);padding:0 12px;font:700 14px/1 var(--s-body);cursor:pointer}
+.smh-theme:hover{border-color:var(--f-hover)}
+.smh-theme svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+@media (max-width:640px){.smh-theme span{display:none}.smh-theme{padding:0}}
+@media (max-width:1060px){.smh-menu{display:none}}
+@media (max-width:640px){
+  .smh-logo small{display:none}.smh-logo b{font-size:16px}
+  .smh-tools>*{padding:0 10px!important}
+  .smh-tools .smh-tool-label{display:none}
+  .smh-cta{padding:0 14px;font-size:14px}
+}
+
+/* ---------- page band (replaces "← My learning route") ---------- */
+.smh-band{background:var(--s-card);border-bottom:1px solid var(--s-line);font-family:var(--s-body)}
+.smh-band .in{max-width:1320px;margin:0 auto;padding:12px var(--s-gutter);display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.smh-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:700 14px/1.3 var(--s-body);color:var(--s-soft)}
+.smh-crumbs a{color:var(--s-cobalt)!important;text-decoration:none!important}
+.smh-crumbs a:hover{text-decoration:underline!important}
+.smh-crumbs span[aria-hidden]{color:#b9b3c2}
+.smh-crumbs b{color:var(--s-ink)}
+.smh-band .code{margin-left:auto;font:700 12px var(--s-body);letter-spacing:.14em;text-transform:uppercase;background:var(--s-paper);border:1px solid var(--s-line);border-radius:99px;padding:6px 12px;color:var(--s-ink)}
+.smh-focus .smh-band{background:var(--s-yellow);border-color:#e9bf12}
+.smh-focus .smh-band .code{background:#fff}
+
+/* ---------- footer ---------- */
+.smh-footer{background:var(--f-foot);color:var(--f-foot-soft);font:400 15px/1.6 var(--s-body);margin-top:48px}
+.smh-footer .in{max-width:1320px;margin:0 auto;padding:30px var(--s-gutter) 34px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:24px}
+.smh-footer b{display:block;color:var(--f-foot-fg);font:800 18px var(--s-display);margin-bottom:6px}
+.smh-footer h2{font:700 12px var(--s-body);letter-spacing:.14em;text-transform:uppercase;color:var(--f-foot-soft);opacity:.85;margin:0 0 8px}
+.smh-footer a{display:block;color:#fff!important;text-decoration:none!important;padding:4px 0;font-weight:700}
+.smh-footer a:hover{color:var(--s-yellow)!important}
+.smh-footer .fine{grid-column:1/-1;border-top:1px solid #ffffff1f;padding-top:14px;font-size:14px}
+@media (max-width:760px){.smh-footer .in{grid-template-columns:1fr 1fr}.smh-footer .in>div:first-child{grid-column:1/-1}}
+
+/* focus visibility */
+.smh-header a:focus-visible,.smh-header button:focus-visible,.smh-band a:focus-visible,.smh-footer a:focus-visible{outline:3px solid var(--s-orange);outline-offset:3px}
+.smh-skip{position:fixed;left:12px;top:-80px;z-index:200;background:var(--s-yellow);color:var(--s-ink);padding:12px 18px;border-radius:12px;font:700 15px var(--s-body)}
+.smh-skip:focus{top:12px}
