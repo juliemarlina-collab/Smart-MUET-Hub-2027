@@ -245,3 +245,13 @@
 @keyframes bob { 50% { transform: translateY(-8px); } }
 .minion.hit .mon { animation: squish 0.45s ease; }
 @media (prefers-reduced-motion: reduce) { .minion .mon, .mp-boss { animation: none !important; } }
+
+/* game cards: main paper colour, with a stripe showing every paper the game trains (eBook colours) */
+.game-card{background-repeat:no-repeat!important;background-size:100% 12px!important;background-position:top!important}
+.gc-grab{background-color:#c90c9f!important;background-image:linear-gradient(90deg,#c90c9f 0 50%,#00a88f 50% 100%)!important}
+.gc-slice{background-color:#3542e8!important;background-image:linear-gradient(90deg,#3542e8 0 50%,#ff792f 50% 100%)!important}
+.gc-boss{background-color:#16141c!important;background-image:linear-gradient(90deg,#3542e8 0 25%,#00a88f 25% 50%,#ff792f 50% 75%,#c90c9f 75% 100%)!important}
+.game-card h2{font-family:Poppins,Manrope,Arial,sans-serif;font-weight:800}
+.game-card p{font-size:16px!important}
+.game-card .status{font-size:12px!important}
+.game-card .button,.game-card a.primary,.game-card .button.primary{background:#ffda16!important;border-color:#ffda16!important;color:#16141c!important}
