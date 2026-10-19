@@ -9,3 +9,28 @@
 /* Layout variety drawn from the brochure reference: a spread, a chapter band and margin notes. */
 .brochure-view{background:linear-gradient(90deg,#fff 0%,#fff 49.5%,#f7f5f9 50%,#fff 50.5%,#fff 100%)}.brochure-view .panel-title{padding:24px 22px 35px;position:relative}.brochure-view .panel-title::after{content:'THE FOUR PAPERS / AT A GLANCE';position:absolute;top:1px;right:20px;font-size:6px;letter-spacing:1.2px;color:#9b91a5}.brochure-view .fact-strip{border-radius:3px 28px 3px 28px}.brochure-view .paper-card{border-radius:3px 22px 3px 22px;border-top:6px solid #ff792f}.brochure-view .paper-card:nth-child(2){border-color:#5625dc}.brochure-view .paper-card:nth-child(3){border-color:#00cdb4}.brochure-view .paper-card:nth-child(4){border-color:#ffda16}.roadmap-view .route-step{border-radius:3px 15px 3px 15px}.roadmap-view .goal-card{border-radius:30px 3px 30px 3px}.skill-visual .label,.skill-visual h3{color:#17151e}.skill-visual[style*="#5625dc"] .label,.skill-visual[style*="#5625dc"] h3,.skill-visual[style*="#c90c9f"] .label,.skill-visual[style*="#c90c9f"] h3{color:white}
 @media(max-width:560px){.brochure-view .panel-title{padding:18px 7px 25px}.brochure-view .panel-title::after{position:static;margin-top:0;font-size:6px}.brochure-view{background:white}}
+
+/* ---------- closed folders (default) ---------- */
+.folder-cover{padding:8px 0 10px}
+.cover-hint{font:700 15px/1.4 DM,Arial,sans-serif;color:#5d5866;margin:0 0 14px}
+.cover-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.cover-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.cover-grid{grid-template-columns:1fr}}
+.cover-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;min-height:220px;padding:26px 22px 22px;border:0;border-radius:6px 26px 26px 26px;cursor:pointer;margin-top:22px;box-shadow:0 10px 24px -14px #16141c66;transition:transform .2s}
+.cover-card::before{content:"";position:absolute;top:-20px;left:0;width:46%;height:24px;background:inherit;border-radius:12px 12px 0 0}
+.cover-card:hover{transform:translateY(-5px) rotate(-.5deg)}
+@media (prefers-reduced-motion:reduce){.cover-card{transition:none}.cover-card:hover{transform:none}}
+.cover-card .no{font:700 13px DM,Arial,sans-serif;letter-spacing:.12em;opacity:.85}
+.cover-card b{font:800 clamp(24px,2.4vw,30px)/1.08 Poppins,Manrope,Arial,sans-serif;letter-spacing:-.03em}
+.cover-card small{font:500 16px/1.45 DM,Arial,sans-serif;opacity:.92}
+.cover-card i{margin-top:auto;font:700 15px DM,Arial,sans-serif;font-style:normal;border:2px solid currentColor;border-radius:99px;padding:8px 14px}
+.cover-card.purple{background:#5625dc;color:#fff}.cover-card.yellow{background:#ffda16;color:#16141c}
+.cover-card.teal{background:#00cdb4;color:#16141c}.cover-card.pink{background:#c90c9f;color:#fff}
+
+/* ---------- open folders share one design: white body edged in the folder colour ---------- */
+.folder-panel{border-top:10px solid var(--fold,#5625dc)!important;border-radius:0 0 26px 26px}
+#panel-welcome{--fold:#5625dc}#panel-know{--fold:#ffda16}#panel-skills{--fold:#00cdb4}#panel-route{--fold:#c90c9f}
+.folder-panel :is(h1,h2){font-family:Poppins,Manrope,Arial,sans-serif!important;font-weight:800!important;font-size:clamp(38px,5vw,64px)!important;line-height:1.03!important;letter-spacing:-.04em!important}
+.folder-panel :is(h1,h2) em{font-style:normal}
+#panel-welcome :is(h1,h2) em{color:#5625dc}#panel-know :is(h1,h2) em{color:#b08a00}#panel-skills :is(h1,h2) em{color:#00897a}#panel-route :is(h1,h2) em{color:#c90c9f}
+.folder-panel .label,.folder-panel .eyebrow{font:700 13px/1.3 DM,Arial,sans-serif!important;letter-spacing:.14em!important}
