@@ -153,6 +153,7 @@ h3.sub{font:800 13px var(--display);letter-spacing:.08em;text-transform:uppercas
 
 <header class="bar">
   <button class="tb" id="bMenu" aria-label="Contents and pages" title="Contents (C)"><svg class="icon"><use href="#i-menu"/></svg><span class="lbl">Contents</span></button>
+  <a class="tb" href="../index.html" aria-label="Back to Smart MUET Hub" title="Hub home"><svg class="icon"><use href="#i-left"/></svg><span class="lbl">Hub</span></a>
   <div class="brand"><b>Smart MUET Guide</b><span id="where">Band Up! 2027</span></div>
   <button class="tb" id="bSearch" aria-label="Search" title="Search (/)"><svg class="icon"><use href="#i-search"/></svg><span class="lbl">Search</span></button>
   <button class="tb" id="bMark" aria-label="Bookmark this page" aria-pressed="false" title="Bookmark (B)"><svg class="icon"><use href="#i-mark"/></svg><span class="lbl">Bookmark</span></button>
@@ -292,6 +293,7 @@ function render(dir){
   $('#bMark').setAttribute('aria-pressed',marks.includes(first)?'true':'false');
   document.querySelectorAll('[data-goto]').forEach(b=>b.classList.toggle('cur',+b.dataset.goto===first||(vis.includes(+b.dataset.goto)&&b.classList.contains('sec'))));
   store.set('last',first);
+  try{localStorage.setItem('smh.pdfbook.v1.last',JSON.stringify(first));const rd=new Set(JSON.parse(localStorage.getItem('smh.pdfbook.v1.read')||'[]'));vis.forEach(v=>rd.add(v));localStorage.setItem('smh.pdfbook.v1.read',JSON.stringify([...rd]));localStorage.setItem('smh.flow.last',JSON.stringify({id:'book',label:'Book / eBook page '+first,path:'04-book/index.html#page='+first,date:new Date().toISOString()}))}catch(e){}
   try{history.replaceState(null,'','#p'+first)}catch(e){}
   refreshNotePanel();
   if(speaking) speak();
@@ -474,10 +476,10 @@ let sx=null,sy=0;
 $('#stage').addEventListener('pointerdown',e=>{if(!inking&&zoom===1&&e.pointerType!=='mouse'){sx=e.clientX;sy=e.clientY}});
 $('#stage').addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)step(dx<0?1:-1)});
 addEventListener('resize',()=>{clearTimeout(layout.h);layout.h=setTimeout(()=>render(),120)});
-addEventListener('hashchange',()=>{const m=location.hash.match(/^#p(\d+)$/);if(m&&+m[1]!==visible(cur)[0])go(+m[1])});
+addEventListener('hashchange',()=>{const m=location.hash.match(/^#(?:p|page=)(\d+)$/);if(m&&+m[1]!==visible(cur)[0])go(+m[1])});
 
 buildToc();
-const m=location.hash.match(/^#p(\d+)$/);
+const m=location.hash.match(/^#(?:p|page=)(\d+)$/);
 cur = m ? +m[1] : store.get('last',1);
 if(innerWidth>=1200) openDrawer('toc');
 render();
