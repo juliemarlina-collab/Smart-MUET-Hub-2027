@@ -1,0 +1,86 @@
+/* Smart MUET · Vault bridge styles (Reflect panel, ring, level celebration) */
+.smh-reflect {
+  margin: 18px 0 6px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: #fff8d6;
+  border: 2px solid #ffda16;
+  color: #241a3d;
+  text-align: left;
+}
+.smh-reflect h3 { margin: 4px 0 10px; font-size: 20px; }
+.smh-reflect-tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #6d5a12; }
+.smh-reflect .smh-q { display: block; font-weight: 700; font-size: 15px; margin: 12px 0 6px; }
+.smh-reflect textarea { width: 100%; box-sizing: border-box; border: 1px solid #d6cce1; border-radius: 12px; padding: 10px 12px; font: inherit; font-size: 16px; }
+.smh-reflect input[type="range"] { width: 100%; accent-color: #5625dc; min-height: 44px; }
+.smh-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.smh-chip, .smh-save {
+  min-height: 44px;
+  border-radius: 99px;
+  border: 1px solid #d6cce1;
+  background: #fff;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  color: #241a3d;
+}
+.smh-chip[aria-pressed="true"] { background: #5625dc; border-color: #5625dc; color: #fff; }
+.smh-save { background: #5625dc; border-color: #5625dc; color: #fff; margin-top: 8px; }
+.smh-save:disabled { opacity: 0.55; }
+.smh-status { font-size: 14px; font-weight: 700; color: #00765f; margin: 8px 0 0; }
+
+.smh-ring .track { fill: none; stroke: #ece6f2; stroke-width: 12; }
+.smh-ring .fill { fill: none; stroke: #5625dc; stroke-width: 12; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 60px 60px; transition: stroke-dashoffset 0.6s ease; }
+.smh-ring.full .fill { stroke: #00a88f; }
+.smh-ring .n { font: 800 26px Manrope, "Sora", Arial, sans-serif; fill: #241a3d; }
+.smh-ring .t { font: 700 9px DM, "DM Sans", Arial, sans-serif; fill: #6a6173; letter-spacing: 0.5px; text-transform: uppercase; }
+
+.smh-celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: #24154688;
+  overflow: hidden;
+  padding: 16px;
+}
+.smh-cel-card {
+  background: #fffaf1;
+  border-radius: 28px;
+  padding: 28px 26px 22px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px #24154666;
+  animation: smh-pop 0.4s ease both;
+  color: #241a3d;
+}
+.smh-cel-card h2 { font: 800 30px/1.15 Manrope, "Sora", Arial, sans-serif; margin: 10px 0 4px; }
+.smh-cel-xp { font: 800 24px Manrope, Arial, sans-serif; color: #00a88f; margin: 4px 0 8px; animation: smh-rise 0.6s ease 0.3s both; }
+.smh-cel-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.smh-cel-btn, .smh-cel-close { min-height: 46px; display: inline-flex; align-items: center; padding: 10px 18px; border-radius: 14px; font-weight: 800; text-decoration: none; font-size: 15px; cursor: pointer; }
+.smh-cel-btn { background: #5625dc; color: #fff; }
+.smh-cel-close { background: #fff; border: 1px solid #d6cce1; color: #241a3d; font: inherit; font-weight: 800; }
+.smh-confetti {
+  position: absolute;
+  top: -12px;
+  left: var(--x);
+  width: 9px;
+  height: 14px;
+  background: var(--c);
+  border-radius: 2px;
+  animation: smh-fall 1.8s ease-in var(--d) both;
+  pointer-events: none;
+}
+@keyframes smh-fall { to { transform: translateY(105vh) rotate(var(--r)); opacity: 0.9; } }
+@keyframes smh-pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes smh-rise { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .smh-cel-card, .smh-cel-xp, .smh-confetti { animation: none !important; }
+  .smh-ring .fill { transition: none; }
+}
+/* Room for the shared bottom navigation on V2 component pages */
+body[data-stage] { padding-bottom: 96px; }
