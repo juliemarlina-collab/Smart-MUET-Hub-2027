@@ -135,6 +135,13 @@
       const st = a.querySelector('.h-ch-st'), all = to - from + 1;
       a.classList.toggle('done', got === all);
       st.textContent = got === all ? '✓ read' : got ? got + ' / ' + all + ' pages' : 'p. ' + from + (from === to ? '' : '–' + to);
+      const G = { 4: ['1.4', 8], 17: ['3.4', 14], 24: ['4.4', 8], 31: ['5.4', 10], 38: ['6.4', 12], 45: ['7', 8] }[from], q = get('smh.ebook.quiz.v1', {}) || {};
+      let star = a.querySelector('.h-ch-star');
+      if (G) {
+        if (!star) { star = document.createElement('span'); star.className = 'h-ch-star'; a.append(star); }
+        star.textContent = q[G[0]] ? '★ ' + q[G[0]].best + ' / ' + G[1] : '▶ game ' + G[0];
+        star.classList.toggle('won', !!q[G[0]]);
+      }
     });
   }
   book();

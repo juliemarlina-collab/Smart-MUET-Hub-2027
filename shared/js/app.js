@@ -10,7 +10,7 @@
     KEY = "smh.app.v1";
 
   /* ---------- Settings (adjust after the pilot week) ---------- */
-  const XP = { arcade: 10, chapter: 30, drill: 20, practice: 50, vault: 50, level: 50, reflection: 10, review: 20, mock: 80, check: 30 };
+  const XP = { star: 2, arcade: 10, chapter: 30, drill: 20, practice: 50, vault: 50, level: 50, reflection: 10, review: 20, mock: 80, check: 30 };
   const STREAK_BONUS = [
     [3, 15],
     [7, 40],
@@ -29,7 +29,7 @@
     ["confident-speaker", "Confident Speaker", "Speaking PREP Lab: try all 3 drills and save a reflection", "#00a88f"],
     ["speed-reader", "Speed Reader", "Reading SCAN Lab: check a practice text and save a reflection", "#ff792f"],
     ["word-smith", "Word Smith", "Writing PEEL Lab: reach the minimum words on a draft and save a reflection", "#d9b100"],
-    ["quiz-champion", "Quiz Champion", "Finish the MUET Quiz Show (all 5 Game Zone pages in Book activities)", "#c98a00"],
+    ["quiz-champion", "Quiz Champion", "Finish the eBook Quiz Show (7, pages 46–47)", "#c98a00"],
     ["vault-1-clear", "Vault 1 Clear", "Complete all 4 Vault 1 components", "#2e9d57"],
     ["vault-2-clear", "Vault 2 Clear", "Complete all 4 Vault 2 components", "#1d6f3e"],
     ["mock-finisher", "Mock Finisher", "Complete all 4 Mock 1 components", "#d0392b"],
@@ -149,6 +149,8 @@
     arr(obj(get("smh.arcade.v1", {})).rounds).forEach((r) => {
       if (r && /^\d{4}-\d\d-\d\d$/.test(r.date)) arcadePerDay[r.date] = (arcadePerDay[r.date] || 0) + 1;
     });
+    const ebookQuiz = obj(get("smh.ebook.quiz.v1", {})),
+      ebookStars = Object.values(ebookQuiz).reduce((n, r) => n + (r && Number.isFinite(r.best) ? Math.max(0, Math.min(60, r.best)) : 0), 0);
     const arcadeRounds = Object.values(arcadePerDay).reduce((n, c) => n + Math.min(3, c), 0);
     const streakRuns = runs(app.days);
     const streakBonus = streakRuns.reduce((n, len) => n + STREAK_BONUS.filter(([d]) => len >= d).reduce((a, [, x]) => a + x, 0), 0);
@@ -163,6 +165,7 @@
       ["Review sets completed", reviewSets, XP.review],
       ["10-minute check", checkDone ? 1 : 0, XP.check],
       ["Arcade rounds (up to 3 a day)", arcadeRounds, XP.arcade],
+      ["eBook game stars (best score)", ebookStars, XP.star],
     ].map(([label, count, each]) => ({ label, count, each, xp: count * each }));
     breakdown.push({ label: "Streak bonuses", count: streakRuns.filter((r) => r >= 3).length, each: null, xp: streakBonus });
     const total = breakdown.reduce((n, b) => n + b.xp, 0);
@@ -173,7 +176,7 @@
       "confident-speaker": Object.values(obj(lab.speaking.drills)).filter((x) => x?.checked).length >= 3 && hasRefl("speaking"),
       "speed-reader": Object.keys(obj(lab.reading.results)).length > 0 && hasRefl("reading"),
       "word-smith": Object.values(obj(lab.writing.results)).some((r) => r && r.score >= r.total) && hasRefl("writing"),
-      "quiz-champion": [1, 2, 3, 4, 5].every((p) => actRead.includes("6-" + p)),
+      "quiz-champion": !!ebookQuiz["7"] || [1, 2, 3, 4, 5].every((p) => actRead.includes("6-" + p)),
       "vault-1-clear": v1 === 4,
       "vault-2-clear": v2 === 4,
       "mock-finisher": m1 === 4,

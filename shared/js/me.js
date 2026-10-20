@@ -103,6 +103,14 @@
     book.append(el('span', 'me-tag', 'EBOOK'), el('b', '', read + ' / 53'), el('small', '', 'eBook pages read'));
     const bb = el('i'); bb.style.setProperty('--w', Math.min(100, read / 53 * 100) + '%'); book.append(bb);
     rec.append(book);
+    const games = window.SMHEbookTotals || { '1.4': 8, '3.4': 14, '4.4': 8, '5.4': 10, '6.4': 12, '7': 8 };
+    const qz = get('smh.ebook.quiz.v1', {}) || {};
+    const got = Object.keys(games).reduce((n, k) => n + (qz[k] && Number.isFinite(qz[k].best) ? Math.min(qz[k].best, games[k]) : 0), 0);
+    const max = Object.values(games).reduce((a, b) => a + b, 0), played = Object.keys(games).filter(k => qz[k]).length;
+    const gm = el('article', 'me-rec p-games');
+    gm.append(el('span', 'me-tag', 'EBOOK GAMES'), el('b', '', '★ ' + got + ' / ' + max), el('small', '', played + ' of 6 games played · ' + Object.keys(games).filter(k => qz[k]).map(k => k + ' ' + qz[k].best + '/' + games[k]).join(' · ')));
+    const gb = el('i'); gb.style.setProperty('--w', got / max * 100 + '%'); gm.append(gb);
+    rec.append(gm);
 
     const meta = $('print-meta');
     if (meta) meta.textContent = [prof.name, prof.cls, 'Printed ' + new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })].filter(Boolean).join(' · ');
