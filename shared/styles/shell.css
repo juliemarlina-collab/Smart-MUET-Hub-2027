@@ -382,3 +382,28 @@ html[data-smh-theme="dark"] .smh-name b+b{color:#ffd21f}
   .smh-foot-theme .smh-theme{color:#fff!important;border-color:#fff!important;box-shadow:0 3px 0 #fff!important;background:transparent!important;padding:0 16px!important}
   .smh-foot-theme .smh-theme span{display:inline!important}
 }
+
+/* =====================================================================
+   Stickers: hero picture beside the heading (Practice, Me), centred guide heroes, no yellow blob
+   ===================================================================== */
+.smh-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,56px);align-items:center}
+.smh-hero-sticker{width:100%;height:auto;max-height:340px;object-fit:contain;filter:drop-shadow(0 14px 18px #16141c22);animation:smh-float 6s ease-in-out infinite}
+@keyframes smh-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (max-width:860px){.smh-hero-grid{grid-template-columns:1fr}.smh-hero-sticker{max-width:520px;margin:0 auto;max-height:260px}}
+@media (prefers-reduced-motion:reduce){.smh-hero-sticker{animation:none}}
+
+/* Learn guide heroes: no yellow blob; the sticker sits in the middle of the card */
+html.smh-shell .hero-collage::before{display:none!important}
+html.smh-shell .hero-collage{display:flex!important;align-items:center;justify-content:center;padding:84px 24px 76px!important;min-height:0!important;aspect-ratio:4/3.1}
+html.smh-shell .hero-collage img{width:86%!important;max-width:560px;max-height:none!important;height:auto;margin:0 auto;filter:drop-shadow(0 16px 18px #16141c26)}
+html.smh-shell .hero-collage .floating-label{left:16px!important;top:-14px!important}
+html.smh-shell .hero-collage .corner-note{right:16px!important;bottom:14px!important}
+@media (max-width:700px){html.smh-shell .hero-collage{aspect-ratio:auto;padding:76px 16px 70px!important}html.smh-shell .hero-collage img{width:92%!important}}
+
+/* Home: the four paper cards show their sticker large and centred */
+html.smh-shell .h-card{min-height:340px;padding:18px 20px 22px}
+html.smh-shell .h-card img{width:100%!important;max-width:none!important;aspect-ratio:16/10!important;object-fit:contain;align-self:center!important;margin:0 0 10px!important;
+  background:#ffffffd9;border-radius:18px;padding:12px;box-sizing:border-box;filter:drop-shadow(0 8px 10px #16141c2e);transition:transform .25s}
+html.smh-shell .h-card:hover img{transform:rotate(-3deg) scale(1.04)}
+html.smh-shell .h-card .code{margin-top:4px}
+@media (prefers-reduced-motion:reduce){html.smh-shell .h-card img{transition:none}html.smh-shell .h-card:hover img{transform:none}}
