@@ -12,7 +12,7 @@
 
   // id: [crumbs, type, exit (activity pages), tab, code]
   const L = (t, p) => [t, p];
-  const learn = L('Learn', '03-guides/index.html'), vault = L('Vault', '05-practice/index.html'),
+  const learn = L('Learn', '03-guides/index.html'), vault = L('Practice', '05-practice/index.html'),
         v1 = L('Vault 1', '07-vault/vault1.html'), v2 = L('Vault 2', '07-vault/vault2.html'), m1 = L('Mock 1', '07-vault/mock1.html'),
         arc = L('Arcade', '08-arcade/index.html'), me = L('Me', '06-progress/index.html');
   const P = {
@@ -25,7 +25,7 @@
     reading:     [[learn, ['Reading · SCAN']], 'lesson', '', 'learn', 'Chapter 5'],
     writing:     [[learn, ['Writing · PEEL']], 'lesson', '', 'learn', 'Chapter 6'],
     diagnostic:  [[['10-minute check']], 'activity', 'index.html', 'home', 'Step 01'],
-    vault:       [[['Vault · Labs, Vault & Mock']], 'hub', '', 'vault', ''],
+    vault:       [[['Practice · Lab, MUET Vault & Arcade']], 'hub', '', 'vault', ''],
     listeninglab:[[vault, ['Listening CLUE Lab']], 'activity', '05-practice/index.html', 'vault', 'Lab · 800/1'],
     speakinglab: [[vault, ['Speaking PREP Lab']], 'activity', '05-practice/index.html', 'vault', 'Lab · 800/2'],
     readinglab:  [[vault, ['Reading SCAN Lab']], 'activity', '05-practice/index.html', 'vault', 'Lab · 800/3'],
@@ -59,7 +59,7 @@
   html.classList.add('smh-shell');
   if (type === 'activity') html.classList.add('smh-focus');
   /* paper colour, the same as the eBook chapters: Listening cobalt · Speaking teal · Reading orange · Writing magenta */
-  const paper = (id.match(/listening|speaking|reading|writing/) || [])[0];
+  const paper = /^arcade/.test(id) ? 'arcade' : (id.match(/listening|speaking|reading|writing/) || [])[0];
   if (paper) html.dataset.paper = paper;
   if (/^(v1|v2|mock1)-/.test(id)) html.classList.add('smh-paperpage');
   /* pages that open with the handwritten greeting share one hero style */
@@ -99,7 +99,7 @@
     hin.append(back);
   } else {
     const nav = el('nav', 'smh-menu'); nav.setAttribute('aria-label', 'Hub sections');
-    [['home', 'Home', 'index.html'], ['book', 'Book', '04-book/index.html'], ['learn', 'Learn', '03-guides/index.html'], ['vault', 'Vault', '05-practice/index.html'], ['me', 'Me', '06-progress/index.html']]
+    [['home', 'Home', 'index.html'], ['book', 'Book', '04-book/index.html'], ['learn', 'Learn', '03-guides/index.html'], ['vault', 'Practice', '05-practice/index.html'], ['me', 'Me', '06-progress/index.html']]
       .forEach(([t, label, path]) => { const a = link(label, path); if (t === tab) a.setAttribute('aria-current', 'page'); nav.append(a); });
     hin.append(nav);
     const last = get('smh.flow.last', {});
@@ -151,11 +151,19 @@
     footer = el('footer', 'smh-footer');
     const fin = el('div', 'in');
     const a = el('div'); a.append(el('b', '', 'Smart MUET Hub'), el('p', '', 'Know the test. Build your skills. Band up. Free MUET practice by the English Language Unit, Jabatan Pengajian Am, Politeknik Port Dickson.'));
-    const b = el('div'); b.append(el('h2', '', 'Your route'), link('Know MUET', '01-welcome/index.html'), link('10-minute check', '05-practice/diagnostic.html'), link('Learn the skills', '03-guides/index.html'), link('Labs, Vault & Mock', '05-practice/index.html'));
+    const b = el('div'); b.append(el('h2', '', 'Your route'), link('Know MUET', '01-welcome/index.html'), link('10-minute check', '05-practice/diagnostic.html'), link('Learn the skills', '03-guides/index.html'), link('Practice: Labs, Vault & Arcade', '05-practice/index.html'));
     const d = el('div'); d.append(el('h2', '', 'More'), link('eBook', '04-book/index.html'), link('Arcade', '08-arcade/index.html'), link('My progress', '06-progress/index.html'), link('My account', '02-account/index.html'));
     const fine = el('p', 'fine', 'Your practice is saved on this device only. © 2027 English Language Unit, JPA, Politeknik Port Dickson.');
     fin.append(a, b, d, fine); footer.append(fin);
   }
+
+  /* ---------- folders: closed until tapped, one open at a time (works for folders built later too) ---------- */
+  document.addEventListener('toggle', e => {
+    const d = e.target;
+    if (!(d instanceof Element) || !d.matches('.smh-folder') || !d.open) return;
+    const group = d.closest('.smh-folders');
+    if (group) group.querySelectorAll('.smh-folder[open]').forEach(o => { if (o !== d) o.open = false; });
+  }, true);
 
   /* ---------- mount ---------- */
   const skip = el('a', 'smh-skip', 'Skip to content');

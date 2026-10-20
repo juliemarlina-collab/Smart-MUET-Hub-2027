@@ -89,7 +89,7 @@
     const card = $('#cont-card');
     if (safe(last.path)) {
       card.href = last.path; $('#cont-k').textContent = 'Continue where you stopped';
-      $('#cont-title').textContent = String(last.label || 'Your last page').replace(/^(Learn|Vault|Home|Book) \/ /, '');
+      $('#cont-title').textContent = String(last.label || 'Your last page').replace(/^(Learn|Vault|Practice|Home|Book) \/ /, '');
       $('#cont-sub').textContent = 'Last opened ' + (last.date ? new Date(last.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'recently') + '.';
       const b = $('#back-continue'); b.href = last.path; b.textContent = 'Continue →';
     } else if (r.diag && r.diag.plan) {

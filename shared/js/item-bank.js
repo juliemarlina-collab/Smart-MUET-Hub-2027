@@ -437,6 +437,126 @@ window.SMHBank = (() => {
       { id: "s10", skill: "reading", clue: "Enrolment in the evening class has doubled since the fees were reduced.", q: "Which sentence means the same?", options: ["More people joined after the class became cheaper", "The fees doubled after more people joined", "The evening class was cancelled"], answer: 0, traps: { 1: "Word-match trap: it reuses “doubled” and “fees” but reverses the meaning.", 2: "Not-stated trap: nothing says the class was cancelled." }, why: "Enrolment doubled = more people joined; fees reduced = cheaper. Same meaning, different words." },
     ],
   };
+  /* ---------- Harder Arcade content: Diploma and Exam mode (MUET Band 3–5 level) ----------
+     sortHard: no easy signpost words, plus one off-topic sentence (index 4) that goes in the bin. */
+  arcade.sortHard = [
+    {
+      id: "h-peel-projects", tech: "PEEL", skill: "writing",
+      topic: "Should polytechnics replace some exams with project-based assessment?",
+      parts: PEEL_PARTS,
+      lines: [
+        "Project-based assessment gives a truer picture of what polytechnic students can actually do.",
+        "A three-hour paper mainly rewards memory under pressure, whereas a project shows how a student plans, solves problems and works with others over several weeks.",
+        "Civil engineering students who design and cost a small footbridge must apply theory in exactly the way a site engineer would.",
+        "Replacing at least some written exams with projects would make a diploma a more reliable signal to employers.",
+        "Many students also enjoy travelling home during the semester break.",
+      ],
+    },
+    {
+      id: "h-peel-parttime", tech: "PEEL", skill: "writing",
+      topic: "Is part-time work harmful to diploma students?",
+      parts: PEEL_PARTS,
+      lines: [
+        "Part-time work becomes harmful once it competes with study time instead of fitting around it.",
+        "Students who work long hours often give up sleep and revision, the two things exam performance depends on most.",
+        "A student who works a night shift before an 8 a.m. lab is unlikely to be fully alert, however motivated he is.",
+        "The real question is not whether students should work, but how many hours they can work without damaging their studies.",
+        "Convenience stores in Malaysia often stay open twenty-four hours a day.",
+      ],
+    },
+    {
+      id: "h-prep-ai", tech: "PREP", skill: "speaking",
+      topic: "Should students be allowed to use AI tools for assignments?",
+      parts: PREP_PARTS,
+      lines: [
+        "I think AI tools should be allowed, but only with clear rules on how they are used.",
+        "Used well, they explain difficult ideas quickly; used carelessly, they let students skip the thinking an assignment is meant to build.",
+        "Last semester our lecturer let us use AI to check grammar but asked for our first drafts too, so nobody could simply copy an answer.",
+        "So the tool itself is not the problem; the rules around it decide whether it helps or harms learning.",
+        "Some new phones even have an AI assistant built into the camera.",
+      ],
+    },
+    {
+      id: "h-peel-rail", tech: "PEEL", skill: "writing",
+      topic: "Should Malaysia spend more on rail than on new highways?",
+      parts: PEEL_PARTS,
+      lines: [
+        "Future transport spending should favour rail over new highways.",
+        "New highways tend to fill with extra traffic within a few years, while one train line can move thousands of commuters an hour without adding a single car.",
+        "Commuters along a busy rail corridor can reach the city centre on time even when the toll roads beside them are jammed.",
+        "Prioritising rail is the more lasting answer to congestion, not merely the more popular one.",
+        "Petrol prices in Malaysia are among the lowest in the region.",
+      ],
+    },
+    {
+      id: "h-prep-group", tech: "PREP", skill: "speaking",
+      topic: "Is it better to revise alone or in a group?",
+      parts: PREP_PARTS,
+      lines: [
+        "For revision, I find a small study group more effective than studying alone.",
+        "Explaining a topic to friends shows me very quickly which parts I don't really understand.",
+        "Before our Thermodynamics test, three of us each taught one chapter, and the gaps in my notes became obvious within an hour.",
+        "That's why I'd recommend a small group, at least in the weeks before an exam.",
+        "My favourite place to study is the second floor of the library.",
+      ],
+    },
+    {
+      id: "h-peel-language", tech: "PEEL", skill: "writing",
+      topic: "Should English be used more in polytechnic lectures?",
+      parts: PEEL_PARTS,
+      lines: [
+        "Wider use of English in technical lectures would better prepare graduates for industry.",
+        "Manuals, standards and supplier correspondence in most technical fields are written in English, so graduates who are used to it adapt faster.",
+        "An electronics graduate who can read a datasheet without translating it can troubleshoot a fault in minutes rather than hours.",
+        "Using more English in lectures is an investment in employability, not a threat to the national language.",
+        "English is spoken as a first language in more than fifty countries.",
+      ],
+    },
+  ];
+  arcade.sliceHard = [
+    { id: "h1", skill: "listening", clue: "If the funding comes through by the end of the month, we’ll extend the programme to Kuantan; otherwise we’ll stick with Port Dickson and Seremban.", q: "What is certain about the programme?", options: ["It will run in Port Dickson and Seremban", "It will move to Kuantan", "It will end this month", "It has received new funding"], answer: 0, traps: { 1: "Condition trap: Kuantan depends on “if the funding comes through”.", 2: "Word-match trap: “end of the month” is the funding deadline, not the end of the programme.", 3: "Too-far trap: the funding has not been confirmed." }, why: "Port Dickson and Seremban continue either way. Kuantan is only possible “if the funding comes through”." },
+    { id: "h2", skill: "listening", clue: "I wouldn’t say the new timetable is perfect, but it’s certainly an improvement on last semester’s.", q: "What is the speaker’s attitude to the new timetable?", options: ["Cautiously positive", "Completely satisfied", "Strongly critical", "Indifferent"], answer: 0, traps: { 1: "Overstatement trap: “wouldn’t say … perfect” rules out complete satisfaction.", 2: "Negative-word trap: “not perfect” is a mild reservation, not strong criticism.", 3: "Opposite trap: “certainly an improvement” is a clear opinion." }, why: "A small reservation (“not perfect”) plus a clear positive (“certainly an improvement”) = cautiously positive." },
+    { id: "h3", skill: "listening", clue: "Registration closes on the fifteenth. Anyone who registered before the first gets the early-bird rate; everyone else pays the standard fee, unless you’re on the committee, in which case it’s waived.", q: "Aina registered on the tenth and is not on the committee. What does she pay?", options: ["The standard fee", "The early-bird rate", "Nothing", "She cannot register"], answer: 0, traps: { 1: "Date trap: early-bird was for registrations before the first.", 2: "Exception trap: only committee members pay nothing.", 3: "Deadline trap: the tenth is before the fifteenth, so she is in time." }, why: "After the first but before the fifteenth, and not on the committee: the standard fee." },
+    { id: "h4", skill: "listening", clue: "The survey was meant to cover all four faculties, but in the end we only had time for engineering and business, so treat the results with caution.", q: "Why should the results be treated with caution?", options: ["Only part of the student population was surveyed", "The questions were badly written", "Engineering students did not respond", "The results were lost"], answer: 0, traps: { 1: "Not-mentioned trap: nothing is said about the questions.", 2: "Contradiction trap: engineering was one of the faculties surveyed.", 3: "Not-mentioned trap: the results exist; they are incomplete." }, why: "Two of four faculties were surveyed, so the results may not represent everyone." },
+    { id: "h5", skill: "listening", clue: "A: Shall we book the hall for Friday? B: Friday’s fine by me, though Hana did say she’s got a site visit that afternoon. A: Then the morning it is.", q: "When will they most likely use the hall?", options: ["Friday morning", "Friday afternoon", "Thursday afternoon", "Whenever Hana is free"], answer: 0, traps: { 1: "Detail trap: Hana is busy in the afternoon, which is why they choose the morning.", 2: "Not-mentioned trap: Thursday is never suggested.", 3: "Too-vague trap: they fix a specific time." }, why: "“Then the morning it is” confirms Friday morning, around Hana’s site visit." },
+    { id: "h6", skill: "listening", clue: "Contrary to what most people assume, the biggest drop in plastic use didn’t come from the bag ban itself but from shoppers bringing their own containers to the wet market.", q: "What caused the biggest drop in plastic use?", options: ["Shoppers bringing their own containers", "The plastic bag ban", "Wet markets selling less", "People’s assumptions"], answer: 0, traps: { 1: "Popular-belief trap: “Contrary to what most people assume” rejects the bag ban.", 2: "Twisted-detail trap: the wet market is where it happened, not the cause.", 3: "Word-match trap: “assume” is said, but assumptions don’t reduce plastic." }, why: "“didn’t come from … but from shoppers bringing their own containers”." },
+    { id: "h7", skill: "reading", clue: "Although remote internships widen access for students in rural areas, employers report that interns who never meet their team in person take longer to build working relationships.", q: "What is the writer’s main point?", options: ["Remote internships have a benefit and a drawback", "Remote internships should be banned", "Rural students prefer remote internships", "Employers dislike rural interns"], answer: 0, traps: { 1: "Too-far trap: a drawback is not a call for a ban.", 2: "Not-stated trap: student preferences are not mentioned.", 3: "Distortion trap: the issue is meeting in person, not where interns live." }, why: "“Although” joins a benefit (wider access) and a drawback (slower relationships)." },
+    { id: "h8", skill: "reading", clue: "The council’s claim that the new cycle lanes have “transformed” commuting is hard to square with its own data: daily cycle trips rose from 410 to 455.", q: "What is the writer’s attitude to the council’s claim?", options: ["Sceptical", "Supportive", "Neutral", "Confused by the data"], answer: 0, traps: { 1: "Opposite trap: “hard to square” means the writer doubts the claim.", 2: "Tone trap: the writer takes a clear position.", 3: "Word-match trap: the writer understands the data and uses it as evidence." }, why: "A rise from 410 to 455 is small, so “transformed” is “hard to square” with it: the writer is sceptical." },
+    { id: "h9", skill: "reading", clue: "Few would dispute that the scheme was well-intentioned; whether it was well-executed is another matter.", q: "What does the writer imply?", options: ["Its aims were good, but it may have been poorly carried out", "It was a complete success", "Nobody supported it", "It has not started yet"], answer: 0, traps: { 1: "Opposite trap: “another matter” signals doubt about the execution.", 2: "Misread trap: “few would dispute” means most people agree the intentions were good.", 3: "Not-stated trap: “was” shows the scheme has already run." }, why: "Good intentions are accepted; “another matter” questions how well it was done." },
+    { id: "h10", skill: "reading", clue: "The study tracked 2,000 graduates for five years and found that those who completed an industrial attachment earned 12% more, a gap the authors attribute partly, but not wholly, to the attachment itself.", q: "Which statement does the text support?", options: ["The attachment explains some of the pay gap", "The attachment explains all of the pay gap", "Graduates without an attachment earned 12% more", "The study lasted twelve years"], answer: 0, traps: { 1: "Overstatement trap: “partly, but not wholly”.", 2: "Reversal trap: those WITH an attachment earned more.", 3: "Number-swap trap: 12 is the percentage; the study lasted five years." }, why: "“partly, but not wholly” = the attachment explains some, not all, of the gap." },
+    { id: "h11", skill: "reading", clue: "The proposal was shelved, not scrapped.", q: "What does the writer suggest about the proposal?", options: ["It may be considered again later", "It has been rejected for good", "It was approved", "It was put into storage"], answer: 0, traps: { 1: "Contrast trap: “not scrapped” rules out permanent rejection.", 2: "Not-stated trap: shelving is the opposite of approving.", 3: "Literal trap: “shelved” is figurative here." }, why: "Shelved = put aside for now; not scrapped = not cancelled. It could return." },
+    { id: "h12", skill: "reading", clue: "Critics argue that the four-day week merely squeezes the same workload into fewer days. Supporters counter that it forces teams to cut pointless meetings.", q: "What does “counter” mean here?", options: ["Respond with an opposing argument", "Count the meetings", "Agree with the critics", "Measure productivity"], answer: 0, traps: { 1: "Word-form trap: “counter” here is not about counting.", 2: "Opposite trap: supporters disagree with the critics.", 3: "Not-stated trap: nothing is measured." }, why: "Supporters reply to the critics with an opposing point: they “counter” the argument." },
+  ];
+  arcade.bossHard = [
+    { id: "hl1", skill: "listening", clue: "We were going to cap the class at thirty, but given the late applications, the dean has agreed to forty, provided we can find a bigger room.", q: "What is the final situation?", options: ["Forty places, if a bigger room is found", "Thirty places, confirmed", "Forty places, confirmed", "Registration has closed"], answer: 0, why: "“provided” makes forty conditional on a bigger room." },
+    { id: "hl2", skill: "listening", clue: "Frankly, the venue was the least of our problems; it was the lack of volunteers that nearly sank the event.", q: "What was the main problem?", options: ["Too few volunteers", "The venue", "The weather", "The budget"], answer: 0, why: "“the least of our problems” downplays the venue; volunteers “nearly sank the event”." },
+    { id: "hl3", skill: "listening", clue: "You’d think the morning session would be busier, but it’s actually the lunchtime slot that fills up first.", q: "Which session fills up first?", options: ["Lunchtime", "Morning", "Evening", "They fill equally"], answer: 0, why: "“You’d think … but actually” rejects the expectation: lunchtime fills first." },
+    { id: "hl4", skill: "listening", clue: "I’m not against the idea in principle; I just don’t think we can afford it this year.", q: "What is the speaker’s view?", options: ["She supports the idea but not the timing", "She opposes the idea completely", "She thinks it is cheap", "She has not decided"], answer: 0, why: "“not against … in principle” = agrees with the idea; the problem is cost this year." },
+    { id: "hk1", skill: "speaking", q: "Your partner says, “Online classes are always worse.” Which reply challenges this best?", options: ["“Always” may be too strong; recorded lectures can actually help revision.", "I disagree.", "Yes, online classes are terrible.", "Let’s talk about something else."], answer: 0, why: "Challenge the overgeneralisation politely and give a reason." },
+    { id: "hk2", skill: "speaking", q: "Which line best moves a stuck discussion towards a decision?", options: ["We’ve covered cost and safety; shall we decide which matters more?", "I already gave my opinion.", "Can we start again?", "Everyone’s ideas are good."], answer: 0, why: "Summarise what was said, then propose how to decide." },
+    { id: "hk3", skill: "speaking", q: "In Part 1, which answer develops the point best?", options: ["Sport builds discipline, because training forces you to plan your week; I learnt this in the futsal team.", "Sport is good and fun.", "I like sport very much.", "Sport, music and art are all good."], answer: 0, why: "Point + reason + personal example in one developed answer." },
+    { id: "hk4", skill: "speaking", q: "Which phrase shows you are building on someone’s idea?", options: ["Adding to Mei’s point, the cost would also fall over time.", "Going back to my point…", "As I said before…", "That’s not what I meant."], answer: 0, why: "Naming the speaker and adding to their idea shows real interaction." },
+    { id: "hr1", skill: "reading", clue: "While the policy has reduced littering in the town centre, residents of outlying areas say the rubbish has simply moved to their streets.", q: "What does the writer suggest?", options: ["The problem may have shifted rather than been solved", "The policy has failed everywhere", "Outlying areas were always cleaner", "Residents support the policy"], answer: 0, why: "Less litter in the centre, more on the edges: the problem “simply moved”." },
+    { id: "hr2", skill: "reading", clue: "The report’s authors concede that their sample was small, yet they insist the trend is “unmistakable”.", q: "Which word shows the authors admit a weakness?", options: ["concede", "insist", "unmistakable", "trend"], answer: 0, why: "To concede is to admit something; the weakness is the small sample." },
+    { id: "hr3", skill: "reading", clue: "Such incentives, critics say, reward the symptom rather than the cause.", q: "What do the critics believe?", options: ["The incentives miss the real problem", "The incentives are too expensive", "The incentives cause illness", "The critics support the incentives"], answer: 0, why: "Treating the symptom, not the cause, means the real problem remains." },
+    { id: "hr4", skill: "reading", clue: "Attendance at the free clinics has risen, but it is too early to say whether community health has improved.", q: "Which conclusion is justified?", options: ["More people use the clinics; the health effect is unclear", "Community health has improved", "The clinics should close", "Attendance has fallen"], answer: 0, why: "Only attendance is known; “too early to say” about health." },
+    { id: "hw1", skill: "writing", q: "Which sentence is the most academic?", options: ["The data suggest that the policy had a limited effect.", "The data shows the policy didn’t really do much.", "Basically, the policy was kind of useless.", "The policy? Not great, honestly."], answer: 0, why: "Hedged, precise and formal: “suggest … a limited effect”." },
+    { id: "hw2", skill: "writing", q: "Which is the strongest thesis for “Should campuses ban single-use plastics?”", options: ["Campuses should ban single-use plastics because alternatives are cheap and the benefit is lasting.", "Plastic is a big problem in the world today.", "There are many views about plastic.", "In this essay I will talk about plastic."], answer: 0, why: "A thesis takes a position and previews the reasons." },
+    { id: "hw3", skill: "writing", q: "Which linker best introduces a concession?", options: ["Admittedly,", "Moreover,", "As a result,", "For instance,"], answer: 0, why: "“Admittedly” accepts a point against your argument before you answer it." },
+    { id: "hw4", skill: "writing", q: "Task 1: your friend asked for advice. Which closing fits best?", options: ["Let me know how it goes. I’m sure you’ll do well!", "Yours faithfully,", "I look forward to your favourable reply.", "End of message."], answer: 0, why: "A friendly, informal close suits a reply to a friend." },
+  ];
+  /* mix the option order once per visit so the right answer is never always first */
+  const mix = (q) => {
+    const order = q.options.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    const traps = {};
+    if (q.traps) Object.entries(q.traps).forEach(([k, v]) => (traps[order.indexOf(+k)] = v));
+    q.options = order.map((i) => q.options[i]);
+    q.answer = order.indexOf(q.answer);
+    if (q.traps) q.traps = traps;
+  };
+  arcade.sliceHard.forEach(mix);
+  arcade.bossHard.forEach(mix);
   arcade.sort.forEach((r) =>
     r.lines.forEach((line, i) => {
       items[r.skill + ":arcade-" + r.id + "-" + (i + 1)] = {
@@ -492,6 +612,24 @@ window.SMHBank = (() => {
       answer: b.answer,
       why: b.why,
     };
+  });
+  arcade.sortHard.forEach((r) =>
+    r.lines.forEach((line, i) => {
+      const opts = r.parts.concat(["Off-topic"]);
+      items[r.skill + ":arcade-" + r.id + "-" + (i + 1)] = {
+        context: textCtx(r.tech + " paragraph · " + r.topic, r.lines.slice(0, 4)),
+        q: "Which part of " + r.tech + " is this sentence? “" + line + "”",
+        options: opts,
+        answer: i,
+        why: i === 4 ? "This sentence does not support the answer: it is off-topic and belongs in the bin." : "In " + r.tech + ", this sentence is the " + r.parts[i] + ".",
+      };
+    }),
+  );
+  arcade.sliceHard.forEach((s) => {
+    items[s.skill + ":arcade-slice-" + s.id] = { context: textCtx(s.skill === "listening" ? "You hear (transcript)" : "You read", [s.clue]), q: s.q, options: s.options, answer: s.answer, why: s.why };
+  });
+  arcade.bossHard.forEach((b) => {
+    items[b.skill + ":arcade-boss-" + b.id] = { context: b.clue ? textCtx(b.skill === "listening" ? "You hear (transcript)" : "You read", [b.clue]) : undefined, q: b.q, options: b.options, answer: b.answer, why: b.why };
   });
   const skillOf = (id) => id.split(":")[0];
   return {
