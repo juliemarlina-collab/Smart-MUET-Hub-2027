@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Smart MUET Hub · Know the test. Band up.</title>
+<meta name="description" content="Free MUET practice hub: learn the four papers, find your level in 10 minutes, then practise with guided labs, Vault papers and a timed mock.">
+<link rel="icon" href="./shared/assets/logo.svg">
+<link rel="stylesheet" href="./shared/styles/tokens.css">
+<link rel="stylesheet" href="./shared/styles/navigation.css">
+<link rel="stylesheet" href="./shared/styles/shell.css">
+<link rel="stylesheet" href="./shared/styles/home.css">
+<script defer src="./shared/js/app.js"></script>
+<script defer src="./shared/js/shell.js"></script>
+<script defer src="./shared/js/navigation.js"></script>
+<script defer src="./shared/js/home.js"></script>
+</head>
+<body data-page-id="home" data-app-root="./">
+<main id="main">
+
+  <section class="h-hero" id="start" aria-labelledby="hero-title">
+    <div class="h-wrap h-grid">
+      <div class="h-left">
+        <div class="h-switch" role="group" aria-label="Is this your first MUET?">
+          <button type="button" data-persona="first" aria-pressed="true">First MUET</button>
+          <button type="button" data-persona="back" aria-pressed="false">I've sat MUET before</button>
+        </div>
+
+        <div data-view="first">
+          <span class="h-pill">MUET 2027 · Politeknik Port Dickson</span>
+          <h1 id="hero-title">Your first MUET.<br><em>One clear step</em><br>at a time.</h1>
+          <p class="h-lead">Learn what the test asks, find your level in 10 minutes, then practise each paper with a guide by your side.</p>
+          <div class="h-btns">
+            <a class="h-btn" href="01-welcome/index.html" data-know>Start here · 15 min →</a>
+            <button type="button" class="h-link" data-persona="back">I've sat MUET before →</button>
+          </div>
+          <ul class="h-facts" aria-label="Quick facts">
+            <li>4 papers</li><li>Band 1 to 5+</li><li>Linked to CEFR</li><li>Free · works on your phone</li>
+          </ul>
+        </div>
+
+        <div data-view="back" hidden>
+          <span class="h-pill" id="streak-pill">Welcome back</span>
+          <h1>Welcome back.<br><em>Let's lift</em><br>your band.</h1>
+          <p class="h-lead" id="back-lead">Pick up where you stopped, clear your review questions, then take on your weakest paper.</p>
+          <div class="h-btns">
+            <a class="h-btn" id="back-continue" href="05-practice/diagnostic.html">Take the 10-minute check →</a>
+            <a class="h-link" id="back-review" href="05-practice/review.html">Review again</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-right">
+        <nav class="h-menu" data-view="first" aria-label="Your route">
+          <div class="h-mh"><span>Your route</span><span>06</span></div>
+          <a class="h-row r-white" href="01-welcome/index.html" data-step="know" data-know><span class="n">00</span><span><b>Know MUET</b><small>Papers, bands and MPM registration</small></span><span class="st"></span></a>
+          <a class="h-row r-cobalt" href="05-practice/diagnostic.html" data-step="check"><span class="n">01</span><span><b>10-minute check</b><small>Find where to begin</small></span><span class="st"></span></a>
+          <a class="h-row r-yellow" href="03-guides/index.html" data-step="learn"><span class="n">02</span><span><b>Learn the skills</b><small>eBook + CLUE · PREP · SCAN · PEEL</small></span><span class="st"></span></a>
+          <a class="h-row r-plum" href="05-practice/index.html" data-step="labs"><span class="n">03</span><span><b>Practise in the Labs</b><small>I do · We do · You do</small></span><span class="st"></span></a>
+          <a class="h-row r-mint" href="05-practice/index.html" data-step="vault"><span class="n">04</span><span><b>Vault &amp; Mock</b><small>Full papers, real timing</small></span><span class="st"></span></a>
+          <a class="h-row r-pink" href="08-arcade/index.html" data-step="arcade"><span class="n">05</span><span><b>Arcade</b><small>3-minute games, any time</small></span><span class="st"></span></a>
+        </nav>
+
+        <div class="h-back" data-view="back" hidden>
+          <a class="h-cont" id="cont-card" href="05-practice/diagnostic.html">
+            <span class="k" id="cont-k">Start with</span>
+            <b id="cont-title">The 10-minute check</b>
+            <span id="cont-sub">It finds your strongest and weakest paper and builds a 3-week plan.</span>
+            <span class="go">Open →</span>
+          </a>
+          <div class="h-tiles">
+            <div><b id="t-streak">0</b><span>day streak</span></div>
+            <div><b id="t-xp">0</b><span id="t-level">XP · Starter</span></div>
+            <div><b id="t-review">0</b><span>reviews due</span></div>
+          </div>
+          <div class="h-skills" id="skill-rows" aria-label="Your four papers"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-road-wrap" aria-labelledby="road-title">
+    <div class="h-wrap">
+      <div class="h-road">
+        <h2 id="road-title">The road to your band</h2>
+        <ol class="h-stops">
+          <li data-step="know"><a class="flag f-white" href="01-welcome/index.html" data-know>Know MUET<small>Chapter 1–2 · 15 min</small></a><span class="dot"></span><span class="when">start here</span></li>
+          <li data-step="check"><a class="flag f-yellow" href="05-practice/diagnostic.html">10-minute check<small>Find your level</small></a><span class="dot"></span><span class="when">day 1</span></li>
+          <li data-step="learn"><a class="flag f-cobalt" href="03-guides/index.html">Learn 4 skills<small>CLUE · PREP · SCAN · PEEL</small></a><span class="dot"></span><span class="when">week 1</span></li>
+          <li data-step="labs"><a class="flag f-mint" href="05-practice/index.html">Skill Labs<small>I do · We do · You do</small></a><span class="dot"></span><span class="when">week 1–2</span></li>
+          <li data-step="vault"><a class="flag f-plum" href="07-vault/vault1.html">Vault 1 · 2<small>Guided, then less help</small></a><span class="dot"></span><span class="when">week 2–3</span></li>
+          <li data-step="mock"><a class="flag f-pink" href="07-vault/mock1.html">Mock 1<small>Exam conditions</small></a><span class="dot"></span><span class="when">week 3</span></li>
+          <li data-step="arcade"><a class="flag f-orange" href="05-practice/review.html">Review &amp; Arcade<small>Every day, 5 min</small></a><span class="dot"></span><span class="when">always</span></li>
+        </ol>
+        <p class="h-bubble">Follow the flags in order. Each one takes you straight to the page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-papers" aria-labelledby="papers-title">
+    <div class="h-wrap">
+      <div class="h-head"><h2 id="papers-title">Four papers. Four techniques.</h2><p>Each paper has one technique to remember. Open a guide to learn it, then try it in the Lab.</p></div>
+      <div class="h-cards">
+        <a class="h-card c-cobalt" href="03-guides/listening.html"><img src="shared/assets/listening.webp" alt="" loading="lazy"><span class="code">800/1</span><b>Listening</b><span class="tech">CLUE</span><small>Hear the whole message, not the first word.</small></a>
+        <a class="h-card c-mint" href="03-guides/speaking.html"><img src="shared/assets/speaking.webp" alt="" loading="lazy"><span class="code">800/2</span><b>Speaking</b><span class="tech">PREP</span><small>One idea, fully developed.</small></a>
+        <a class="h-card c-yellow" href="03-guides/reading.html"><img src="shared/assets/reading.webp" alt="" loading="lazy"><span class="code">800/3</span><b>Reading</b><span class="tech">SCAN</span><small>Search with purpose, then confirm.</small></a>
+        <a class="h-card c-pink" href="03-guides/writing.html"><img src="shared/assets/writing.webp" alt="" loading="lazy"><span class="code">800/4</span><b>Writing</b><span class="tech">PEEL</span><small>Develop each point, don't just list.</small></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
