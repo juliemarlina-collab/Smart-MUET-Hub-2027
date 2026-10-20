@@ -544,8 +544,10 @@ html[data-smh-theme="dark"] .me-profile label{color:#d6d2df}
   .smh-sec-head h2{font-size:18pt!important}
   .me-profile :is(input,select){border:0;border-bottom:1px solid #999;border-radius:0;min-height:0;padding:2px 0;-webkit-appearance:none;appearance:none}
   .me-level,.me-card,.me-chart,.me-board{box-shadow:none!important;border:1px solid #bbb;break-inside:avoid}
-  .me-summary{grid-template-columns:repeat(6,1fr)}.me-papers{grid-template-columns:repeat(4,1fr)}.me-records{grid-template-columns:repeat(5,1fr)}.me-two{grid-template-columns:1fr 1fr}
+  .me-summary{grid-template-columns:repeat(6,1fr)}.me-papers{grid-template-columns:repeat(4,1fr)}.me-records{grid-template-columns:repeat(3,1fr)}.me-two{grid-template-columns:1fr 1fr}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;animation:none!important}
 }
 .me-board .smh-badge-card.locked .smh-badge-art{filter:grayscale(.85);opacity:.55}
 @media print{.smh-sec-head{break-after:avoid}.me-records,.me-two{break-inside:avoid}}
+.p-games{--pc:#ff7a2f;--pf:#16141c}
+@media (min-width:1001px){.me-records{grid-template-columns:repeat(3,minmax(0,1fr))}}

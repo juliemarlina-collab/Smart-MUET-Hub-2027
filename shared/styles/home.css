@@ -143,3 +143,5 @@ body{margin:0;background:var(--s-paper);color:var(--s-ink);font-family:var(--s-b
 @media (max-width:520px){.h-book-cover{grid-template-columns:1fr;justify-items:center}.h-chapters{grid-template-columns:1fr}.h-cover{width:min(78%,280px)}}
 @media (prefers-reduced-motion:reduce){.h-cover,.h-cover-shine,.h-ch,.h-ch img,.h-book-bar i{transition:none}}
 html[data-smh-theme="dark"] .h-eyebrow{color:#ffd21f}
+.h-ch-star{position:absolute;right:10px;bottom:10px;font:800 12px "DM Sans",Arial,sans-serif;background:#fff6d1;border:1.5px solid #e3a800;color:#16141c;border-radius:99px;padding:4px 8px}
+.h-ch-star.won{background:#ffda16;border-color:#16141c}
