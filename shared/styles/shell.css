@@ -352,3 +352,32 @@ html.smh-shell main h3:not([class]){font-size:clamp(20px,1.8vw,26px)}
 html.smh-shell .smh-crumbs{font-size:clamp(13px,1vw,15px)!important}
 html.smh-shell main :is(.button,.pill,.primary,.back,.cam-btn,.submit-button,.h-btn){font-size:clamp(15px,1.1vw,17px)!important}
 @media (min-width:1600px){html.smh-shell .smh-header .in,html.smh-shell .smh-band .in{max-width:1480px}}
+
+/* ---------- Header v3: name stacked beside the logo at the same height, Back button ---------- */
+html.smh-shell .smh-logo{gap:10px}
+html.smh-shell .smh-logo img{width:var(--logo,58px)!important;height:var(--logo,58px)!important}
+html.smh-shell .smh-name{display:flex;flex-direction:column;justify-content:center;height:var(--logo,58px)}
+html.smh-shell .smh-name b{display:block;font:800 calc(var(--logo,58px) * .46)/.98 var(--s-display)!important;letter-spacing:-.035em!important;white-space:nowrap}
+html.smh-shell .smh-name b+b{color:#5625dc}
+html[data-smh-theme="dark"] .smh-name b+b{color:#ffd21f}
+.smh-header{--logo:clamp(48px,4.4vw,60px)}
+.smh-back{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;min-width:48px;padding:0 18px 0 12px;border-radius:99px;background:var(--f-bar);color:var(--f-fg)!important;text-decoration:none!important;font:700 clamp(15px,1.1vw,17px)/1 var(--s-body);border:2px solid var(--f-fg);box-shadow:0 4px 0 var(--f-fg);transition:transform .1s,box-shadow .1s;white-space:nowrap}
+.smh-back svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.smh-back:hover{transform:translateY(-1px);box-shadow:0 5px 0 var(--f-fg)}
+.smh-back:active{transform:translateY(3px);box-shadow:0 1px 0 var(--f-fg)}
+.smh-back:focus-visible{outline:3px solid var(--s-orange);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.smh-back{transition:none}}
+@media (max-width:640px){.smh-back span{display:none}.smh-back{padding:0}.smh-crumbs{flex:1 1 0!important}}
+@media (max-width:640px){
+  .smh-header{--logo:44px}
+  .smh-back{min-height:44px;min-width:44px}
+  .smh-header .in{gap:6px!important}
+}
+@media (max-width:385px){.smh-header{--logo:38px}}
+/* theme button: in the header on tablet and computer; on phone hub pages it sits in the band */
+.smh-band .smh-theme-band{display:none}
+@media (max-width:640px){
+  html.smh-shell:not(.smh-focus) body:not([data-page-id="home"]) .smh-header .smh-theme:not(.smh-theme-band){display:none}
+  html.smh-shell:not(.smh-focus) .smh-band .smh-theme-band{display:inline-flex;min-height:36px!important;min-width:36px!important;box-shadow:0 2px 0 var(--f-fg)!important;border-width:1.5px!important;flex:none}
+  html.smh-shell:not(.smh-focus) .smh-band .smh-theme-band svg{width:16px;height:16px}
+}
