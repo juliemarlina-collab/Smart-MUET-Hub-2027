@@ -24,6 +24,7 @@
       ["#3542e8", "#1e2690"],
       ["#00a88f", "#04685a"],
       ["#ffb703", "#a96d00"],
+      ["#c90c9f", "#7a0a60"],
     ];
   const BOSS_KEY = "smh.arcade.boss.v1";
   const getBoss = () => {
@@ -70,7 +71,10 @@
     missed = [],
     timeLeft = 0,
     timer = 0,
-    live = false;
+    live = false,
+    T = A.tier(),
+    combo = A.combo(),
+    order = [];
 
   /* ---------- Stage skeleton ---------- */
   const top = el("div", "mp-top"),
@@ -129,7 +133,11 @@
       btn.dataset.handPress = "";
       btn.setAttribute("aria-pressed", String(id === levelId));
       btn.innerHTML = monster(b.body, b.dark, b.horns, 64, true);
-      btn.append(el("b", "", b.name), el("span", "", b.level + " · " + b.hp + " HP · " + b.time + "s"), el("span", "won", won[id] && won[id].won ? "Defeated ✓" : ""));
+      const sec = el("span", "", "");
+      const paintSec = () => (sec.textContent = b.level + " · " + b.hp + " HP · " + Math.round(b.time * A.tier().time) + "s");
+      paintSec();
+      btn._paint = paintSec;
+      btn.append(el("b", "", b.name), sec, el("span", "won", won[id] && won[id].won ? "Defeated ✓" : ""));
       btn.onclick = () => {
         levelId = id;
         pick.querySelectorAll(".boss-choice").forEach((x) => x.setAttribute("aria-pressed", String(x === btn)));
@@ -143,15 +151,19 @@
     showOverlay([
       el("span", "eyebrow light", "BOSS BATTLE · ALL FOUR PAPERS · 3 LIVES"),
       el("h2", "", "Choose your boss."),
-      el("p", "", "Each right answer lands a punch. A wrong punch, or running out of time, and the boss hits back."),
+      el("p", "", "Each right answer lands a punch. Below half health the boss enrages: less time to answer. Clean hits in a row build a combo."),
       pick,
+      A.tierPicker(() => pick.querySelectorAll(".boss-choice").forEach((x) => x._paint && x._paint())),
       go,
     ]);
   }
 
   function buildQueue() {
     const by = {};
-    A.shuffle(Bank.arcade.boss).forEach((q) => (by[q.skill] = by[q.skill] || []).push(q));
+    const easy = Bank.arcade.boss,
+      hard = Bank.arcade.bossHard || [],
+      pool = !T.hard ? easy : T.strict || levelId === "mock1" ? hard : levelId === "v2" ? hard.concat(A.shuffle(easy).slice(0, 8)) : A.shuffle(easy).slice(0, 12).concat(hard.slice(0, 8));
+    A.shuffle(pool).forEach((q) => (by[q.skill] = by[q.skill] || []).push(q));
     const order = A.shuffle(Object.keys(by)),
       out = [];
     while (order.some((k) => by[k].length)) order.forEach((k) => by[k].length && out.push(by[k].shift()));
@@ -159,6 +171,8 @@
   }
   function start() {
     boss = BOSSES[levelId];
+    T = A.tier();
+    combo = A.combo();
     queue = buildQueue();
     qi = 0;
     hp = boss.hp;
@@ -209,13 +223,16 @@
     }
     parts.push(el("p", "mp-question", q.q));
     qCard.replaceChildren(...parts);
+    order = A.shuffle(q.options.map((_, i) => i));
+    minions.classList.toggle("four", q.options.length > 3);
     minions.replaceChildren(
-      ...q.options.map((t, i) => {
+      ...order.map((i, k) => {
+        const t = q.options[i];
         const b = el("button", "minion");
         b.type = "button";
         b.dataset.opt = i;
         b.dataset.gameTarget = "";
-        b.innerHTML = monster(MINION[i][0], MINION[i][1], (i % 2) + 1, 78, false);
+        b.innerHTML = monster(MINION[k % 4][0], MINION[k % 4][1], (k % 2) + 1, 78, false);
         b.append(el("span", "m-label", t));
         b.setAttribute("aria-label", "Punch: " + t);
         b.onclick = (e) => {
@@ -224,7 +241,9 @@
         return b;
       }),
     );
-    timeLeft = boss.time;
+    const rage = hp <= boss.hp / 2;
+    bossBox.classList.toggle("rage", rage);
+    timeLeft = Math.max(6, Math.round(boss.time * T.time * (rage ? 0.75 : 1)));
     H.set({ round: "Q" + asked + " · " + boss.name + " " + hp + "/" + boss.hp, time: timeLeft });
     clearInterval(timer);
     timer = setInterval(tick, 1000);
@@ -263,14 +282,16 @@
       clearInterval(timer);
       hp--;
       correct++;
-      const pts = 10 + Math.floor(timeLeft / 2);
+      const mult = combo.hit(),
+        pts = (10 + Math.floor(timeLeft / 2)) * mult;
       score += pts;
       H.set({ score, round: "Q" + asked + " · " + boss.name + " " + hp + "/" + boss.hp });
       drawHp();
       A.sfx.good();
       fx(bossBox, "hurt", 520);
       const br = bossBox.getBoundingClientRect();
-      A.pop(stage, br.left - sr.left + br.width / 2, br.top - sr.top + 30, "−1 HP  +" + pts, "good");
+      A.pop(stage, br.left - sr.left + br.width / 2, br.top - sr.top + 30, "−1 HP  +" + pts + (mult > 1 ? "  combo ×" + mult : ""), "good");
+      if (hp === Math.floor(boss.hp / 2)) status.textContent = boss.name + " is enraged! Less time from now on.";
       m.classList.add("right");
       status.textContent = "Hit! " + q.why;
       setTimeout(next, A.reduced() ? 1400 : 1700);
@@ -281,6 +302,7 @@
     live = false;
     clearInterval(timer);
     const q = queue[qi];
+    combo.miss();
     hearts--;
     H.set({ hearts });
     A.sfx.roar();
@@ -348,7 +370,7 @@
     if (ranOut) status.textContent = boss.name + " escaped: no more questions this round.";
     A.results({
       game: "monster-punch",
-      title: "Monster Punch · " + boss.name + (won ? " defeated" : ""),
+      title: "Monster Punch · " + boss.name + " · " + T.name + (won ? " · defeated" : ""),
       score,
       correct,
       total: asked,
@@ -363,5 +385,5 @@
   if (BOSSES[want]) levelId = want;
   bossBox.innerHTML = monster(BOSSES[levelId].body, BOSSES[levelId].dark, BOSSES[levelId].horns, 150, true);
   startScreen();
-  H.set({ hearts, score: 0, round: "Ready", time: BOSSES[levelId].time });
+  H.set({ hearts, score: 0, round: "Ready", time: Math.round(BOSSES[levelId].time * A.tier().time) });
 })();

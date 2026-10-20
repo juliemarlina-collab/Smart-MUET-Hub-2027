@@ -15,7 +15,7 @@
   A.soundButton($("#sound"));
 
   const Q_TIME = 25,
-    ORB_COL = ["#3542e8", "#00a88f", "#ff792f"];
+    ORB_COL = ["#3542e8", "#00a88f", "#ff792f", "#c90c9f"];
   let qs = [],
     qi = 0,
     hearts = 3,
@@ -33,7 +33,10 @@
     trail = [],
     prev = null,
     pointerDown = false,
-    handMode = false;
+    handMode = false,
+    T = A.tier(),
+    qTime = Q_TIME,
+    combo = A.combo();
 
   /* ---------- Stage skeleton ---------- */
   const panel = el("div", "as-panel"),
@@ -97,7 +100,7 @@
   function showOverlay(nodes) {
     overlay.replaceChildren(...nodes);
     overlay.hidden = false;
-    const b = overlay.querySelector("button");
+    const b = overlay.querySelector("button.primary") || overlay.querySelector("button");
     b && b.focus({ preventScroll: true });
   }
   function startScreen() {
@@ -105,15 +108,25 @@
     go.type = "button";
     go.dataset.handPress = "";
     go.onclick = start;
+    const info = el("span", "eyebrow light"),
+      paint = () => {
+        const t = A.tier();
+        info.textContent = "10 CLUES · 3 LIVES · " + Math.round(Q_TIME * t.time) + " SECONDS EACH" + (t.hard ? " · 4 OPTIONS" : "");
+      };
+    paint();
     showOverlay([
-      el("span", "eyebrow light", "10 CLUES · 3 LIVES · 25 SECONDS EACH"),
+      info,
       el("h2", "", "Slice the answer. Dodge the traps."),
-      el("p", "", "Read the clue first. The options fly up from below: slice only the right one. Traps cost a life and tell you which trap it was."),
+      el("p", "", "Read the clue first. The options fly up from below: slice only the right one. 3 clean slices in a row = combo ×2, 6 in a row = ×3."),
+      A.tierPicker(paint),
       go,
     ]);
   }
   function start() {
-    qs = A.shuffle(Bank.arcade.slice);
+    T = A.tier();
+    qTime = Math.round(Q_TIME * T.time);
+    combo = A.combo();
+    qs = (T.hard ? A.shuffle(Bank.arcade.sliceHard) : A.shuffle(Bank.arcade.slice)).slice(0, 10);
     qi = 0;
     hearts = 3;
     score = 0;
@@ -139,7 +152,7 @@
       const node = el("button", "orb");
       node.type = "button";
       node.dataset.gameTarget = "";
-      node.style.setProperty("--c", ORB_COL[k % 3]);
+      node.style.setProperty("--c", ORB_COL[k % 4]);
       node.append(el("span", "orb-text", q.options[i]));
       node.setAttribute("aria-label", "Option: " + q.options[i]);
       node.onclick = (e) => {
@@ -149,8 +162,8 @@
       const o = { i, node, x: 0, y: 0, vx: 0, vy: 0, alive: true, wait: k * 0.55, lane: k };
       return o;
     });
-    timeLeft = Q_TIME;
-    H.set({ round: "Clue " + (qi + 1) + "/" + qs.length, time: timeLeft });
+    timeLeft = qTime;
+    H.set({ round: "Clue " + (qi + 1) + "/" + qs.length + (combo.streak >= 3 ? " · ×" + (combo.streak >= 6 ? 3 : 2) : ""), time: timeLeft });
     clearInterval(timer);
     timer = setInterval(tick, 1000);
     live = true;
@@ -172,6 +185,7 @@
       H.set({ hearts });
       A.sfx.bad();
       first = false;
+      combo.miss();
       endQ(false, "Time up.");
     }
   }
@@ -208,9 +222,9 @@
       lanes = orbs.length,
       laneW = W / lanes,
       peak = top + 10 + Math.random() * Math.max(10, (Ht - top) * 0.28),
-      T = (input.isHand() ? 6.2 : 5.2) + Math.random() * 0.8,
+      T2 = ((input.isHand() ? 6.2 : 5.2) + Math.random() * 0.8) / (T.speed || 1),
       h = Ht + 10 - peak,
-      g = (8 * h) / (T * T);
+      g = (8 * h) / (T2 * T2);
     o.g = g;
     o.y = Ht + 10;
     o.vy = -Math.sqrt(2 * g * h);
@@ -293,21 +307,24 @@
     A.sfx.slice();
     splitFx(o, o.i === q.answer);
     if (o.i === q.answer) {
-      const pts = first ? 10 + Math.floor(timeLeft / 3) : 4;
+      const mult = first ? combo.hit() : 1,
+        pts = (first ? 10 + Math.floor(timeLeft / 3) : 4) * mult;
+      if (!first) combo.miss();
       score += pts;
       if (first) correct++;
       H.set({ score });
       A.sfx.good();
-      A.pop(stage, px, py, "+" + pts, "good");
+      A.pop(stage, px, py, "+" + pts + (mult > 1 ? "  combo ×" + mult : ""), "good");
       endQ(true, "");
     } else {
       first = false;
+      combo.miss();
       hearts--;
       H.set({ hearts });
       A.sfx.bad();
       A.pop(stage, px, py, "Trap!", "bad");
       status.textContent = q.traps[o.i] || "That option is a trap.";
-      if (hearts <= 0) endQ(false, q.traps[o.i] || "");
+      if (hearts <= 0 || T.strict) endQ(false, q.traps[o.i] || "");
     }
   }
   function splitFx(o, good) {
@@ -359,7 +376,7 @@
     setTimeout(
       () =>
         showOverlay([
-          el("span", "eyebrow light", won ? (first ? "CLEAN SLICE" : "GOT IT IN THE END") : hearts <= 0 ? "OUT OF LIVES" : "TIME UP"),
+          el("span", "eyebrow light", won ? (first ? "CLEAN SLICE" + (combo.streak >= 3 ? " · COMBO ×" + (combo.streak >= 6 ? 3 : 2) : "") : "GOT IT IN THE END") : hearts <= 0 ? "OUT OF LIVES" : timeLeft <= 0 ? "TIME UP" : "TRAP · ONE CHANCE IN EXAM MODE"),
           el("h2", "", won ? (first ? "Sharp eyes!" : "Found it.") : "Here’s the answer."),
           why,
           next,
@@ -373,7 +390,7 @@
     cancelAnimationFrame(raf);
     A.results({
       game: "air-slice",
-      title: "Air Slice",
+      title: "Air Slice · " + T.name,
       score,
       correct,
       total: qi + 1,
@@ -388,5 +405,5 @@
   document.addEventListener("smh:motion", () => live && layoutStatic());
   addEventListener("resize", () => live && A.reduced() && layoutStatic());
   startScreen();
-  H.set({ hearts, score, round: "Ready", time: Q_TIME });
+  H.set({ hearts, score, round: "Ready", time: Math.round(Q_TIME * A.tier().time) });
 })();

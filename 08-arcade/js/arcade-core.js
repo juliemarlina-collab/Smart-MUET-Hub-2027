@@ -420,5 +420,57 @@
     a.focus();
   }
 
-  window.SMHArcade = { el, shuffle, handPress, reduced, motionButton, soundButton, sfx, hud, input, camera, pop, results, miss, load, roundsToday, DAILY_XP_ROUNDS, XP_PER_ROUND };
+  /* ---------- Challenge level: Warm-up · Diploma (default) · Exam mode ----------
+     time = share of the normal timer, speed = how fast targets move, hard = MUET-level bank,
+     strict = one chance per question (Exam mode). Saved on this device. */
+  const TIER_KEY = "smh.arcade.tier",
+    TIERS = {
+      warm: { id: "warm", name: "Warm-up", note: "Short clues, more time. Good for your first game.", time: 1, speed: 1, hard: false, strict: false },
+      diploma: { id: "diploma", name: "Diploma", note: "MUET-level questions, closer traps, less time.", time: 0.72, speed: 1.3, hard: true, strict: false },
+      exam: { id: "exam", name: "Exam mode", note: "Hardest questions at exam pace. One chance each.", time: 0.55, speed: 1.6, hard: true, strict: true },
+    };
+  function tier() {
+    const t = getJSON(TIER_KEY, "diploma");
+    return TIERS[t] || TIERS.diploma;
+  }
+  function tierPicker(onPick) {
+    const box = el("div", "tier-pick"),
+      note = el("p", "tier-note", tier().note);
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", "Challenge level");
+    const row = el("div", "tier-row");
+    Object.values(TIERS).forEach((t) => {
+      const b = el("button", "tier", t.name);
+      b.type = "button";
+      b.dataset.handPress = "";
+      b.setAttribute("aria-pressed", String(t.id === tier().id));
+      b.onclick = () => {
+        setJSON(TIER_KEY, t.id);
+        row.querySelectorAll(".tier").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        note.textContent = t.note;
+        onPick && onPick(t);
+      };
+      row.append(b);
+    });
+    box.append(row, note);
+    return box;
+  }
+  /* combo: 3 clean answers in a row = ×2, 6 in a row = ×3 */
+  function combo() {
+    let n = 0;
+    return {
+      hit() {
+        n++;
+        return n >= 6 ? 3 : n >= 3 ? 2 : 1;
+      },
+      miss() {
+        n = 0;
+      },
+      get streak() {
+        return n;
+      },
+    };
+  }
+
+  window.SMHArcade = { el, shuffle, handPress, reduced, motionButton, soundButton, sfx, hud, input, camera, pop, results, miss, load, roundsToday, tier, tierPicker, combo, TIERS, DAILY_XP_ROUNDS, XP_PER_ROUND };
 })();
