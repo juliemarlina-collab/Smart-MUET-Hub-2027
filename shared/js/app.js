@@ -150,7 +150,7 @@
       if (r && /^\d{4}-\d\d-\d\d$/.test(r.date)) arcadePerDay[r.date] = (arcadePerDay[r.date] || 0) + 1;
     });
     const ebookQuiz = obj(get("smh.ebook.quiz.v1", {})),
-      ebookStars = Object.values(ebookQuiz).reduce((n, r) => n + (r && Number.isFinite(r.best) ? Math.max(0, Math.min(60, r.best)) : 0), 0);
+      ebookStars = Object.values(ebookQuiz).reduce((n, r) => n + (r && Number.isFinite(r.best) ? Math.max(0, Math.min(14, r.best)) : 0), 0);
     const arcadeRounds = Object.values(arcadePerDay).reduce((n, c) => n + Math.min(3, c), 0);
     const streakRuns = runs(app.days);
     const streakBonus = streakRuns.reduce((n, len) => n + STREAK_BONUS.filter(([d]) => len >= d).reduce((a, [, x]) => a + x, 0), 0);
