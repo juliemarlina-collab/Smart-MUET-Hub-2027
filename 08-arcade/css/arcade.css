@@ -255,3 +255,28 @@
 .game-card p{font-size:16px!important}
 .game-card .status{font-size:12px!important}
 .game-card .button,.game-card a.primary,.game-card .button.primary{background:#ffda16!important;border-color:#ffda16!important;color:#16141c!important}
+
+/* challenge level picker on each game's start screen */
+.tier-pick{margin:4px 0 18px;max-width:560px}
+.tier-row{display:flex;flex-wrap:wrap;gap:8px}
+.tier{min-height:44px;padding:0 18px;border-radius:99px;border:2px solid #ffffff55;background:transparent;color:#fff;font:700 15px/1 "DM Sans",Arial,sans-serif;cursor:pointer}
+.tier[aria-pressed="true"]{background:#ffda16;border-color:#ffda16;color:#16141c}
+.tier:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.tier-note{margin:10px 0 0!important;font-size:15px!important;color:#e4ddff}
+.combo-badge{display:inline-block;background:#ffda16;color:#16141c;border-radius:99px;padding:2px 9px;font-weight:800;margin-left:6px}
+/* Grab & Throw: the off-topic bin */
+.gt-buckets.has-bin{grid-template-columns:repeat(4,1fr)}
+.bucket.bin{grid-column:1/-1;flex-direction:row;min-height:52px;gap:10px;border-style:dashed;background:#ffffff0d}
+.bucket.bin .b-letter{font-size:24px}
+/* Monster Punch: four minions in harder rounds */
+.mp-minions.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:760px){.mp-minions.four{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.mp-minions.four{grid-template-columns:1fr}}
+.mp-boss.rage .mon{filter:drop-shadow(0 0 14px #ff3d3d)}
+.stage-overlay{justify-content:safe center}
+html.smh-shell .stage-overlay .eyebrow,html.smh-shell .stage-overlay .eyebrow.light{color:#ffda16!important}
+.gt-buckets.has-bin ~ .gt-hint{display:none}
+/* harder rounds have 5 sentences: let the tray sit in the flow so nothing overlaps */
+.stage:has(.gt-buckets.has-bin){height:auto;min-height:640px}
+.stage:has(.gt-buckets.has-bin) .gt-tray{position:static}
+html.smh-shell .stage .eyebrow.light{color:#ffda16!important}
