@@ -117,7 +117,7 @@
   }
   /* theme setting: light (default) or dark, remembered on this device */
   const tbtn = el('button', 'smh-theme'); tbtn.type = 'button';
-  const tbtn2 = el('button', 'smh-theme smh-theme-band'); tbtn2.type = 'button';
+  const tbtn2 = el('button', 'smh-theme smh-theme-foot'); tbtn2.type = 'button';
   const paintTheme = () => { paintOne(tbtn); paintOne(tbtn2); };
   const paintOne = tbtn => {
     const dark = document.documentElement.dataset.smhTheme === 'dark';
@@ -155,7 +155,8 @@
 
   /* ---------- band ---------- */
   let band = null;
-  if (id !== 'home') {
+  /* no band on the Learn pages (no breadcrumb or chapter chip there) */
+  if (id !== 'home' && tab !== 'learn') {
     band = el('div', 'smh-band');
     const bin = el('div', 'in');
     const c = el('nav', 'smh-crumbs'); c.setAttribute('aria-label', 'You are here');
@@ -167,7 +168,6 @@
     bin.append(c);
     if (tools.length) { const t = el('div', 'smh-tools'); tools.forEach(b => t.append(b)); bin.append(t); }
     if (code) bin.append(el('span', 'code', code));
-    if (type !== 'activity') bin.append(tbtn2); // phone: the theme button moves here so the header fits
     band.append(bin);
   }
 
@@ -180,7 +180,8 @@
     const b = el('div'); b.append(el('h2', '', 'Your route'), link('Know MUET', '01-welcome/index.html'), link('10-minute check', '05-practice/diagnostic.html'), link('Learn the skills', '03-guides/index.html'), link('Practice: Labs, Vault & Arcade', '05-practice/index.html'));
     const d = el('div'); d.append(el('h2', '', 'More'), link('eBook', '04-book/index.html'), link('Arcade', '08-arcade/index.html'), link('My progress', '06-progress/index.html'), link('My account', '02-account/index.html'));
     const fine = el('p', 'fine', 'Your practice is saved on this device only. © 2027 English Language Unit, JPA, Politeknik Port Dickson.');
-    fin.append(a, b, d, fine); footer.append(fin);
+    const set = el('div', 'smh-foot-theme'); set.append(el('h2', '', 'Display'), tbtn2); // phone: the theme switch lives here so the header fits
+    fin.append(a, b, d, set, fine); footer.append(fin);
   }
 
   /* ---------- folders: closed until tapped, one open at a time (works for folders built later too) ---------- */
