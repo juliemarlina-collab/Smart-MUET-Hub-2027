@@ -12,7 +12,7 @@
   const title = s => s[0].toUpperCase() + s.slice(1);
   const tech = { listening: 'CLUE', speaking: 'PREP', reading: 'SCAN', writing: 'PEEL' };
   const labBadge = { listening: 'sharp-ears', speaking: 'confident-speaker', reading: 'speed-reader', writing: 'word-smith' };
-  const rowColour = { listening: 'r-cobalt', speaking: 'r-mint', reading: 'r-yellow', writing: 'r-pink' };
+  const rowColour = { listening: 'r-p-listening', speaking: 'r-p-speaking', reading: 'r-p-reading', writing: 'r-p-writing' };
 
   /* ---------- what has this learner done? ---------- */
   function record() {
