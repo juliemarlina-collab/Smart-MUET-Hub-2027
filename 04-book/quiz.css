@@ -55,3 +55,25 @@
 .qz-confetti{position:absolute;inset:0;pointer-events:none;z-index:5;width:100%;height:100%}
 @media (max-width:640px){.qz-cats{grid-template-columns:repeat(2,minmax(0,1fr))}.qz-match{grid-template-columns:1fr}.qz-head{grid-template-columns:auto 1fr auto;}.qz-score{grid-column:1/-1;justify-self:start;order:3}.qz-fab{right:10px;bottom:64px}}
 @media (prefers-reduced-motion:reduce){.qz-fab{animation:none}}
+/* several games on one spread: the buttons stack in a dock */
+.qz-dock{position:fixed;right:18px;bottom:72px;z-index:60;display:grid;gap:10px;justify-items:end}
+.qz-dock .qz-fab{position:static}
+@media (max-width:640px){.qz-dock{right:10px;bottom:64px;gap:8px}.qz-dock .qz-fab small{display:none}.qz-dock .qz-fab{padding:6px 12px 6px 6px}.qz-dock .qz-fab-play{width:36px;height:36px}}
+/* long sentences in "build the answer" sorts */
+.qz-chip{white-space:normal;text-align:left;line-height:1.35}
+.qz-part:has(.qz-cats) .qz-chips .qz-chip{border-radius:14px}
+.qz-cats:has(> :nth-child(4):last-child){grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:640px){.qz-cats:has(> :nth-child(4):last-child){grid-template-columns:1fr 1fr}}
+/* self-check */
+.qz-checkrow{display:flex;gap:10px;align-items:flex-start;background:#fff;border:2px solid #e2dcec;border-radius:12px;padding:10px 12px;margin:0 0 8px;font-size:15.5px;cursor:pointer}
+.qz-checkrow input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--qc)}
+.qz-checkrow:has(input:checked){border-color:var(--qc);background:#f4efff}
+.qz-select{font:600 16px "DM Sans",Arial,sans-serif;min-height:48px;border:2px solid #16141c;border-radius:12px;padding:0 12px;background:#fff;width:100%;max-width:320px}
+.qz-bars{display:grid;gap:8px;text-align:left;margin:12px 0}
+.qz-barrow{display:grid;grid-template-columns:90px 1fr 50px;gap:10px;align-items:center;font-weight:700}
+.qz-track{height:12px;background:#efeaf7;border-radius:99px;overflow:hidden}.qz-track i{display:block;height:100%;background:var(--qc);border-radius:99px}
+/* star summary */
+.qz-starlist{display:grid;gap:8px;margin:10px 0}
+.qz-starrow{--qc:#5625dc;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;text-align:left;background:#fff;border:2px solid #e2dcec;border-left:8px solid var(--qc);border-radius:12px;padding:10px 12px;font:600 15px "DM Sans",Arial,sans-serif;cursor:pointer;color:#16141c}
+.qz-starrow .qz-code{background:var(--qc);color:#fff}
+.qz-starrow.won>span:last-child{font-weight:800;background:#ffda16;border-radius:99px;padding:4px 9px}

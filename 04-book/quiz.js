@@ -67,34 +67,82 @@
         ['WRITING · What is the minimum length for Writing Task 2?', ['100 words', '200 words', '250 words'], 2],
         ['WRITING · Which sign-off suits a formal email to a director?', ['See ya!', 'Yours sincerely,', 'Take care,'], 1]] }] }
   };
-  const totalOf = g => g.parts.reduce((n, p) => n + (p.type === 'speak' ? 4 : p.type === 'match' ? p.left.length : p.items.length), 0);
+  Object.assign(GAMES, {
+    '1.6': { pages: [10], title: 'Where am I now?', colour: '#5625dc', kind: 'check', note: 'Tick each skill you feel confident using. Then choose your next focus and target band. This reflection does not predict a band.',
+      skills: [['listening', 'Listening', ['I can follow the main points of a clear talk on a familiar topic.', 'I can catch details, opinions and changes of mind in a discussion.', 'I can follow a long talk and work out what the speaker really means.']],
+        ['speaking', 'Speaking', ['I can give a simple opinion with one reason.', 'I can develop a point with a reason and an example.', 'I can respond to others and keep a group discussion going.']],
+        ['reading', 'Reading', ['I can find facts in notices, emails and short texts.', 'I can follow the writer’s main argument and opinion in an article.', 'I can infer meaning and attitude in long, complex texts.']],
+        ['writing', 'Writing', ['I can write a short email that answers every note.', 'I can write a clear essay with developed PEEL paragraphs.', 'I can choose a formal or informal style to suit the reader.']]] },
+    '3.3': { pages: [20], title: 'Try it first: only one is chosen', colour: '#1d4fbf', note: 'Answer before you read the CLUE thinking on the page.',
+      text: 'Hana: Are we still meeting on Tuesday morning for the study group? · Ravi: That was the plan, but the lab is booked then. Wednesday afternoon is free. · Hana: Wednesday’s no good for me. I’ve got a presentation. What about Thursday? · Ravi: Thursday afternoon works. Let’s make it then.', parts: [
+      { type: 'mcq', label: 'Try it first', items: [
+        ['When will the study group meet this week?', ['Tuesday morning', 'Wednesday afternoon', 'Thursday afternoon'], 2, 'Thursday afternoon: Ravi confirms it in the last line.'],
+        ['Why is Tuesday morning wrong?', ['Hana is busy', 'The lab is booked', 'Ravi forgot'], 1, '“That was the plan, but the lab is booked then.”'],
+        ['Which line confirms the final answer?', ['“That was the plan, but…”', '“Wednesday’s no good for me.”', '“Let’s make it then.”'], 2, '“Let’s make it then” confirms the decision.']] }] },
+    '4.3': { pages: [27], title: 'Try it first: build the PREP', colour: '#11a865', note: 'Task: “How can students build stronger friendships?” Put each sentence in its PREP place.', parts: [
+      { type: 'sort', label: 'Build the answer', cats: ['Point', 'Reason', 'Example', 'Point again'], items: [
+        ['I suggest joining a campus club to build stronger friendships.', 0],
+        ['A club gives students regular opportunities to cooperate with people who share their interests.', 1],
+        ['For example, photography club members can plan an exhibition together and help each other improve.', 2],
+        ['Therefore, joining a club is a practical way to turn shared interests into lasting friendships.', 3]] }] },
+    '5.3': { pages: [34], title: 'Try it first: find it, then confirm it', colour: '#d99a00', note: 'Answer before you read the SCAN thinking on the page.',
+      text: 'When the student council opened a small food bank in the library foyer last March, organisers expected about twenty visitors a week. Within a month, nearly eighty students were collecting basic items. The council moved the food bank to a larger room beside the cafeteria. Not everyone welcomed the change at first. Some students worried that the new location was too public. To protect privacy, volunteers now prepare packs in advance so that visitors can collect them quickly.', parts: [
+      { type: 'mcq', label: 'Try it first', items: [
+        ['Why do volunteers now prepare packs in advance?', ['To serve more students', 'To help visitors feel comfortable', 'To reduce food costs'], 1, 'B paraphrases “to protect privacy”.'],
+        ['Which words in the text does the right answer paraphrase?', ['“collecting basic items”', '“to protect privacy”', '“a larger room”'], 1, 'Feeling comfortable = privacy is protected.'],
+        ['Why is “To serve more students” tempting but wrong?', ['More students came, but that is not why packs are prepared.', 'The text says packs cost less.', 'The text never mentions students.'], 0, 'A familiar idea is not the reason the question asks for.']] }] },
+    '6.3': { pages: [41], title: 'Try it first: build the PEEL', colour: '#c62f8b', note: 'Question: “Should polytechnics make community service compulsory?” Put each sentence in its PEEL place.', parts: [
+      { type: 'sort', label: 'Build the paragraph', cats: ['Point', 'Explain', 'Example', 'Link'], items: [
+        ['Compulsory community service can help students develop practical teamwork skills.', 0],
+        ['Service projects require students to plan tasks, share responsibilities and solve problems with others.', 1],
+        ['For instance, a group organising a beach clean-up in Port Dickson must arrange transport and keep volunteers safe.', 2],
+        ['Therefore, making community service part of the programme gives every student real teamwork practice.', 3]] }] },
+    '3.5': { pages: [22], title: 'Spot the trap: word-match', colour: '#1d4fbf', note: 'Two quick cases. Can you avoid the word-match trap?', parts: [
+      { type: 'mcq', label: 'Spot the mistake', items: [
+        ['You hear: “The meeting is at two. Sorry, I mean three.” A student answers 2 p.m. What went wrong?', ['The student chose the first detail; the speaker corrected it.', 'Two is never mentioned.', 'The student should have guessed.'], 0, 'Speakers correct themselves. Answer the FINAL detail.'],
+        ['“We’ll take the train… actually, the bus is cheaper, let’s do that.” How will they travel?', ['By train', 'By bus', 'By car'], 1, '“actually” signals the change: the bus.']] }] },
+    '4.5': { pages: [29], title: 'Spot the trap: script-reader freeze', colour: '#11a865', note: 'Two quick cases. Can you avoid the script-reader freeze?', parts: [
+      { type: 'mcq', label: 'Spot the mistake', items: [
+        ['Which preparation note is best for Part 1?', ['A full paragraph written word for word', 'club → teamwork → photo exhibition → friendships', 'No notes at all'], 1, 'Keywords in PREP order, not full sentences.'],
+        ['In the group discussion, which response shows you are listening?', ['Reading out your prepared speech', '“Building on Mei’s idea, we could also…”', 'Staying silent until the end'], 1, 'Build on others’ ideas by name.']] }] },
+    '5.5': { pages: [36], title: 'Spot the trap: keyword-only matcher', colour: '#d99a00', note: 'Two quick cases. Read before AND after the gap.', parts: [
+      { type: 'mcq', label: 'Spot the mistake', items: [
+        ['“Fewer students now drive to campus. ____ As a result, the car park is rarely full.” Which sentence fits the gap?', ['However, many still prefer cars.', 'Most of them cycle or take the free shuttle bus instead.', 'Cars are expensive in Malaysia.'], 1, 'It explains the change and leads to “As a result”.'],
+        ['A student chose “However, many still prefer cars” because it repeats “cars”. Which check would have helped?', ['Read the sentence before and after the gap', 'Choose the longest option', 'Match the most keywords'], 0, 'The meaning must fit on both sides of the gap.']] }] },
+    '6.5': { pages: [43], title: 'Spot the trap: off-topic wanderer', colour: '#c62f8b', note: 'Two quick cases. Does every part answer the full task?', parts: [
+      { type: 'mcq', label: 'Spot the mistake', items: [
+        ['Task 2: “Explain why mental health education is important for students.” Which topic sentence answers the full task?', ['Stress is caused by exams and money problems.', 'Mental health education helps students recognise stress early and seek help.', 'Many students live in hostels.'], 1, 'It answers WHY the education is important.'],
+        ['Task 1 asks you to accept an invitation, suggest a time and offer help. A reply accepts and suggests a time. What is missing?', ['The greeting', 'Offering help', 'The date of the email'], 1, 'Respond to every prompt in Task 1.']] }] },
+    '8.2': { pages: [50], title: 'My eBook stars', colour: '#5625dc', kind: 'stars', note: 'Your best stars from every eBook game, saved on this device.' }
+  });
+  const totalOf = g => !g.parts ? 0 : g.parts.reduce((n, p) => n + (p.type === 'speak' ? 4 : p.type === 'match' ? p.left.length : p.items.length), 0);
   const pageGame = {}; Object.entries(GAMES).forEach(([id, g]) => g.pages.forEach(p => (pageGame[p] = id)));
   window.SMHEbookGames = { GAMES, totalOf, KEY };
 
   /* ---------- floating Play button, shown on question pages ---------- */
-  const fab = el('button', 'qz-fab'); fab.type = 'button'; fab.hidden = true;
-  document.body.append(fab);
-  let current = null;
+  const dock = el('div', 'qz-dock'); document.body.append(dock);
   function visiblePages() {
     const c = document.getElementById('count'); if (!c) return [];
     const m = c.textContent.match(/^(\d+)(?:–(\d+))?/); if (!m) return [];
     return m[2] ? [+m[1], +m[2]] : [+m[1]];
   }
   function updateFab() {
-    const id = visiblePages().map(p => pageGame[p]).find(Boolean);
-    current = id || null;
-    if (!id) { fab.hidden = true; return; }
-    const g = GAMES[id], rec = load()[id];
-    fab.hidden = false;
-    fab.style.setProperty('--qc', g.colour);
-    fab.innerHTML = '';
-    fab.append(el('span', 'qz-fab-play', '▶'), el('b', '', 'Play ' + id + ' · ' + g.title), el('small', '', rec ? '★ best ' + rec.best + ' / ' + rec.total : 'Tap to answer and score'));
-    fab.setAttribute('aria-label', 'Play the interactive version of ' + id + ' ' + g.title + (rec ? ', best score ' + rec.best + ' out of ' + rec.total : ''));
+    const ids = [...new Set(visiblePages().map(p => pageGame[p]).filter(Boolean))];
+    dock.replaceChildren();
+    ids.forEach(id => {
+      const g = GAMES[id], rec = load()[id], fab = el('button', 'qz-fab'); fab.type = 'button';
+      fab.style.setProperty('--qc', g.colour);
+      const sub = g.kind === 'check' ? (selfCheck() ? 'Saved · focus: ' + selfCheck().focus : 'Tick, choose, save') : g.kind === 'stars' ? starSummary().got + ' / ' + starSummary().max + ' stars so far' : rec ? '★ best ' + rec.best + ' / ' + rec.total : 'Tap to answer and score';
+      fab.append(el('span', 'qz-fab-play', g.kind === 'stars' ? '★' : g.kind === 'check' ? '✓' : '▶'), el('b', '', (g.kind ? 'Open ' : 'Play ') + id + ' · ' + g.title), el('small', '', sub));
+      fab.setAttribute('aria-label', (g.kind ? 'Open ' : 'Play the interactive version of ') + id + ' ' + g.title + '. ' + sub);
+      fab.onclick = () => (g.kind === 'check' ? openCheck(id) : g.kind === 'stars' ? openStars(id) : open(id));
+      dock.append(fab);
+    });
   }
   const cnt = document.getElementById('count');
   if (cnt) new MutationObserver(updateFab).observe(cnt, { childList: true, characterData: true, subtree: true });
   setTimeout(updateFab, 300);
-  fab.addEventListener('click', () => current && open(current));
+
 
   /* ---------- the game dialog ---------- */
   function open(id) {
@@ -137,7 +185,7 @@
           card.append(row); sec.append(card);
         });
       } else if (part.type === 'sort') {
-        sec.append(el('p', 'qz-help', 'Tap a word, then tap its job.'));
+        sec.append(el('p', 'qz-help', (part.items[0][0].length > 30 ? 'Tap a sentence, then tap its place.' : 'Tap a word, then tap its job.')));
         const words = el('div', 'qz-chips'), cats = el('div', 'qz-cats');
         let picked = null;
         shuffle(part.items).forEach(([w, cat]) => {
@@ -233,6 +281,77 @@
     close.onclick = () => d.close();
     d.addEventListener('close', () => setTimeout(() => d.remove(), 50));
     paint(); d.showModal(); close.focus();
+  }
+
+  const SC = 'smh.ebook.selfcheck.v1';
+  const selfCheck = () => { try { const v = JSON.parse(localStorage.getItem(SC)); return v && v.focus ? v : null; } catch { return null; } };
+  function starSummary() {
+    const rec = load(); let got = 0, max = 0;
+    Object.entries(GAMES).forEach(([id, g]) => { if (g.kind) return; const t = totalOf(g); max += t; got += rec[id] ? Math.min(rec[id].best, t) : 0; });
+    return { got, max, rec };
+  }
+  function shell(id, title, colour) {
+    const d = el('dialog', 'qz'); d.style.setProperty('--qc', colour); d.setAttribute('aria-label', id + ' ' + title);
+    const head = el('div', 'qz-head'), close = el('button', 'qz-x', '✕'); close.type = 'button'; close.setAttribute('aria-label', 'Close');
+    head.append(el('span', 'qz-code', id), el('h2', '', title), el('span'), close);
+    const body = el('div', 'qz-body'); d.append(head, body); document.body.append(d);
+    close.onclick = () => d.close(); d.addEventListener('close', () => { setTimeout(() => d.remove(), 50); updateFab(); });
+    return { d, body, close };
+  }
+  function openCheck(id) {
+    const g = GAMES[id], prev = selfCheck() || {}, { d, body, close } = shell(id, g.title, g.colour);
+    body.append(el('p', 'qz-note', g.note));
+    const boxes = {};
+    g.skills.forEach(([k, name, items]) => {
+      const sec = el('section', 'qz-part'); sec.append(el('h3', '', name));
+      boxes[k] = items.map((t, i) => {
+        const lab = el('label', 'qz-checkrow'), b = el('input'); b.type = 'checkbox'; b.checked = !!(prev.ticks && prev.ticks[k] && prev.ticks[k][i]);
+        lab.append(b, el('span', '', t)); sec.append(lab); return b;
+      });
+      body.append(sec);
+    });
+    const sec = el('section', 'qz-part'); sec.append(el('h3', '', 'My next practice focus'));
+    const foc = el('div', 'qz-opts two'); let focus = prev.focus || '';
+    g.skills.forEach(([k, name]) => { const b = el('button', 'qz-opt' + (focus === k ? ' ok' : ''), name); b.type = 'button'; b.onclick = () => { focus = k; [...foc.children].forEach(x => x.classList.toggle('ok', x === b)); }; foc.append(b); });
+    const tgt = el('select', 'qz-select'); ['', 'Band 3.0', 'Band 3.5', 'Band 4.0', 'Band 4.5', 'Band 5.0', 'Band 5+'].forEach(v => { const o = el('option', '', v || 'My target band…'); o.value = v; tgt.append(o); });
+    let prof = {}; try { prof = JSON.parse(localStorage.getItem('smh.me.profile')) || {}; } catch {}
+    tgt.value = prev.target || prof.target || '';
+    sec.append(foc, el('h3', '', 'My target band'), tgt);
+    const saveBtn = el('button', 'qz-finish', 'Save my starting point ✓'); saveBtn.type = 'button';
+    const out = el('div', 'qz-result'); out.hidden = true;
+    saveBtn.onclick = () => {
+      const ticks = Object.fromEntries(Object.entries(boxes).map(([k, bs]) => [k, bs.map(b => b.checked)]));
+      const count = Object.fromEntries(Object.entries(ticks).map(([k, t]) => [k, t.filter(Boolean).length]));
+      if (!focus) focus = Object.entries(count).sort((a, b) => a[1] - b[1])[0][0];
+      const rec = { ticks, focus, target: tgt.value, date: new Date().toISOString() };
+      try { localStorage.setItem(SC, JSON.stringify(rec)); localStorage.setItem('smh.flow.focus', JSON.stringify(focus)); if (tgt.value) { prof.target = tgt.value; localStorage.setItem('smh.me.profile', JSON.stringify(prof)); } } catch {}
+      out.hidden = false; out.replaceChildren();
+      const name = g.skills.find(s => s[0] === focus)[1];
+      out.append(el('h3', '', 'Saved! Your focus: ' + name));
+      const bars = el('div', 'qz-bars');
+      g.skills.forEach(([k, n, items]) => { const r = el('div', 'qz-barrow'); r.append(el('span', '', n)); const t = el('div', 'qz-track'), f = el('i'); f.style.width = count[k] / items.length * 100 + '%'; t.append(f); r.append(t, el('b', '', count[k] + ' / ' + items.length)); bars.append(r); });
+      const go = el('a', 'qz-small', 'Open the ' + name + ' Lab ↗'); go.href = '../05-practice/' + focus + '-lab.html';
+      out.append(bars, el('p', '', 'Shown on your Me page' + (tgt.value ? ' with your target ' + tgt.value : '') + '. Use it to plan practice, not to predict a result.'), go);
+      out.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'center' });
+      confetti(d);
+    };
+    body.append(sec, saveBtn, out); d.showModal(); close.focus();
+  }
+  function openStars(id) {
+    const g = GAMES[id], { d, body, close } = shell(id, g.title, g.colour), sum = starSummary();
+    body.append(el('p', 'qz-big', '★ ' + sum.got + ' / ' + sum.max), el('p', 'qz-note', g.note));
+    const list = el('div', 'qz-starlist');
+    Object.entries(GAMES).forEach(([gid, gg]) => {
+      if (gg.kind) return;
+      const t = totalOf(gg), r = sum.rec[gid], row = el('button', 'qz-starrow' + (r ? ' won' : '')); row.type = 'button';
+      row.style.setProperty('--qc', gg.colour);
+      row.append(el('span', 'qz-code', gid), el('b', '', gg.title), el('span', '', r ? '★ ' + Math.min(r.best, t) + ' / ' + t : '▶ play · p. ' + gg.pages[0]));
+      row.onclick = () => { d.close(); location.hash = '#page=' + gg.pages[0]; };
+      list.append(row);
+    });
+    const badges = el('a', 'qz-finish', 'See my Hub badges ↗'); badges.href = '../06-progress/index.html#badges';
+    body.append(list, badges); d.showModal(); close.focus();
+    if (sum.got && sum.got === sum.max) confetti(d);
   }
 
   function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
