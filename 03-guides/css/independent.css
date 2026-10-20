@@ -6,3 +6,9 @@
 @media(max-width:700px){.improve-card h3 br{display:initial}}
 .exam-map{margin-top:28px;border:1px solid #dcd1e8;border-radius:15px;padding:0 20px 20px;background:#faf8ff}.exam-map summary{padding:18px 0 0;font-weight:700;cursor:pointer;min-height:44px}.exam-map p{font-size:14px;color:#71647e}.table-scroll{width:100%;overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px;margin-top:20px;text-align:left}caption{text-align:left;font-size:14px;font-weight:700;padding:5px 0 15px}th,td{padding:13px 12px;border-bottom:1px solid #dcd1e8;vertical-align:top}th{background:#ede5fc;font-size:14px}td:first-child{font-weight:700;white-space:nowrap}@media(max-width:700px){.exam-map{padding-inline:14px}table{font-size:14px}th,td{padding:11px 8px}.table-scroll table{min-width:390px}}
 .step-heading h2{letter-spacing:-.035em;word-spacing:.04em}
+
+/* Speaking folder · same 6-step layout, teal like the eBook Speaking chapter */
+.speaking-collage{background:#dcf5ef}.speaking-collage::before{background:#00a88f}.speaking-hero h1 em{color:#00826f}
+.lesson-step .phrase-title{margin:34px 0 14px;font-size:24px}
+.lesson-step .prep-layout,.lesson-step .studio-grid,.lesson-step .two-spread{margin-top:22px}
+.lesson-step #speaking-quiz{margin:8px 0 28px}
