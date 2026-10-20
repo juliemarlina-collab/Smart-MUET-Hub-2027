@@ -105,3 +105,41 @@ body{margin:0;background:var(--s-paper);color:var(--s-ink);font-family:var(--s-b
 /* the four paper cards and skill rows use the eBook cover colours */
 .c-cobalt{background:#1d4fbf;color:#fff}.c-mint{background:#11a865;color:#fff}.c-yellow{background:#fbc74b}.c-pink{background:#c62f8b;color:#fff}
 .r-p-listening{background:#1d4fbf;color:#fff}.r-p-speaking{background:#11a865;color:#fff}.r-p-reading{background:#fbc74b}.r-p-writing{background:#c62f8b;color:#fff}
+
+/* ---------- eBook section (before the road) ---------- */
+.h-book{padding:56px 0 10px}
+.h-eyebrow{display:block;font:700 13px var(--s-body);letter-spacing:.14em;text-transform:uppercase;color:#5625dc;margin-bottom:8px}
+.h-book-grid{display:grid;grid-template-columns:minmax(260px,.8fr) 1.6fr;gap:clamp(24px,4vw,48px);align-items:start}
+.h-book-cover{position:sticky;top:110px;display:grid;gap:18px;justify-items:start}
+.h-cover{position:relative;display:block;width:min(100%,330px);border-radius:6px 16px 16px 6px;overflow:hidden;transform:perspective(900px) rotateY(-12deg) rotateZ(-1deg);
+  box-shadow:-10px 0 0 -2px #16141c22,14px 18px 0 #16141c,0 26px 40px #16141c33;transition:transform .35s}
+.h-cover::before{content:"";position:absolute;inset:0 auto 0 0;width:14px;background:linear-gradient(90deg,#00000040,#0000);z-index:1}
+.h-cover img{display:block;width:100%;height:auto}
+.h-cover-shine{position:absolute;inset:0;background:linear-gradient(115deg,#fff0 40%,#ffffff55 50%,#fff0 60%);transform:translateX(-100%);transition:transform .8s}
+.h-cover:hover{transform:perspective(900px) rotateY(-4deg) rotateZ(0)}
+.h-cover:hover .h-cover-shine{transform:translateX(100%)}
+.h-book-info{display:grid;gap:14px;width:min(100%,330px)}
+.h-book-prog span{font:700 15px var(--s-body)}
+.h-book-bar{height:12px;background:#ece7ff;border-radius:99px;overflow:hidden;margin-top:6px;box-shadow:inset 0 0 0 1px #16141c22}
+.h-book-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1d4fbf,#11a865,#fbc74b,#c62f8b);border-radius:99px;transition:width .6s}
+.h-book-feat{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.h-book-feat li{font:600 15px var(--s-body);padding-left:26px;position:relative}
+.h-book-feat li::before{content:"✓";position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:#11a865;color:#fff;font-size:12px;display:grid;place-items:center}
+.h-chapters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.h-ch{--cc:#5625dc;--cf:#fff;position:relative;display:grid;grid-template-columns:62px 1fr;grid-template-rows:auto auto 1fr auto;column-gap:12px;row-gap:2px;align-items:start;
+  background:#fff;border-radius:6px 20px 20px 20px;padding:14px;text-decoration:none;color:#16141c;border-top:8px solid var(--cc);box-shadow:0 3px 0 #16141c14;transition:transform .2s,box-shadow .2s}
+.h-ch::before{content:"";position:absolute;top:-20px;left:0;width:40%;height:16px;background:var(--cc);border-radius:10px 10px 0 0}
+.h-ch:hover{transform:translateY(-4px) rotate(-.6deg);box-shadow:0 10px 0 #16141c1f}
+.h-ch img{grid-row:1/5;width:62px;height:auto;border-radius:4px;box-shadow:3px 4px 0 #16141c;rotate:-3deg;transition:rotate .25s}
+.h-ch:hover img{rotate:2deg}
+.h-ch-n{font:800 12px var(--s-body);letter-spacing:.14em;color:var(--cc)}
+.h-ch b{font:800 17px/1.15 var(--s-display)}
+.h-ch small{font:500 13.5px/1.35 var(--s-body);color:#5d5866}
+.h-ch-st{justify-self:start;margin-top:6px;font:700 12px var(--s-body);background:#f1eef8;border-radius:99px;padding:5px 9px}
+.h-ch.done .h-ch-st{background:#16141c;color:#fff}
+.c-ink{--cc:#16141c}.c-purple{--cc:#5625dc}.c-yellow{--cc:#e3a800}.c-listening{--cc:#1d4fbf}.c-speaking{--cc:#11a865}.c-reading{--cc:#e0a612}.c-writing{--cc:#c62f8b}
+@media (max-width:1100px){.h-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){.h-book-grid{grid-template-columns:1fr}.h-book-cover{position:static;grid-template-columns:minmax(0,.9fr) 1fr;align-items:center;justify-items:stretch}}
+@media (max-width:520px){.h-book-cover{grid-template-columns:1fr;justify-items:center}.h-chapters{grid-template-columns:1fr}.h-cover{width:min(78%,280px)}}
+@media (prefers-reduced-motion:reduce){.h-cover,.h-cover-shine,.h-ch,.h-ch img,.h-book-bar i{transition:none}}
+html[data-smh-theme="dark"] .h-eyebrow{color:#ffd21f}
