@@ -119,6 +119,27 @@
     return r;
   }
 
+  /* eBook section: pages read, continue where you stopped, chapters finished */
+  function book() {
+    const read = new Set((get('smh.pdfbook.v1.read', []) || []).filter(Number.isInteger));
+    const last = get('smh.pdfbook.v1.last', null);
+    const n = Math.min(53, read.size);
+    const rd = $('#book-read'); if (!rd) return;
+    rd.textContent = n + ' of 53 pages read';
+    $('#book-bar').style.width = (n / 53 * 100) + '%';
+    const btn = $('#book-open');
+    if (Number.isInteger(last) && last > 1 && last <= 53) { btn.href = '04-book/index.html#page=' + last; btn.textContent = 'Continue at page ' + last + ' →'; }
+    $$('.h-ch').forEach(a => {
+      const from = +a.dataset.from, to = +a.dataset.to; let got = 0;
+      for (let p = from; p <= to; p++) if (read.has(p)) got++;
+      const st = a.querySelector('.h-ch-st'), all = to - from + 1;
+      a.classList.toggle('done', got === all);
+      st.textContent = got === all ? '✓ read' : got ? got + ' / ' + all + ' pages' : 'p. ' + from + (from === to ? '' : '–' + to);
+    });
+  }
+  book();
+  window.addEventListener('storage', book);
+
   const r = render();
   const saved = get('smh.persona', null);
   setPersona(saved === 'back' || saved === 'first' ? saved : (r.active ? 'back' : 'first'), false);
