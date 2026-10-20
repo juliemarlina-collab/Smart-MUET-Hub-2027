@@ -101,3 +101,7 @@ body{margin:0;background:var(--s-paper);color:var(--s-ink);font-family:var(--s-b
 .h-card small{font-size:15px;line-height:1.4}
 .c-cobalt{background:var(--s-cobalt);color:#fff}.c-mint{background:var(--s-mint)}.c-yellow{background:var(--s-yellow)}.c-pink{background:var(--s-pink);color:#fff}
 #main a:focus-visible,#main button:focus-visible{outline:3px solid var(--s-orange);outline-offset:3px}
+
+/* the four paper cards and skill rows use the eBook cover colours */
+.c-cobalt{background:#1d4fbf;color:#fff}.c-mint{background:#11a865;color:#fff}.c-yellow{background:#fbc74b}.c-pink{background:#c62f8b;color:#fff}
+.r-p-listening{background:#1d4fbf;color:#fff}.r-p-speaking{background:#11a865;color:#fff}.r-p-reading{background:#fbc74b}.r-p-writing{background:#c62f8b;color:#fff}
