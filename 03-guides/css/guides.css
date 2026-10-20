@@ -11,10 +11,10 @@
 .red-hello{font-family:Manrope,Arial,sans-serif;font-weight:800;font-style:italic;position:relative;width:fit-content;max-width:100%}.red-hello::after{content:"";position:absolute;height:5px;background:#ffda24;bottom:-8px;left:8%;width:70%;rotate:-3deg}
 
 /* learning folders use the eBook paper colours; all four share one design */
-.skill-folder.p-listening{background:#3542e8;color:#fff}
-.skill-folder.p-speaking{background:#00a88f;color:#fff}
-.skill-folder.p-reading{background:#ff792f;color:#16141c}
-.skill-folder.p-writing{background:#c90c9f;color:#fff}
+.skill-folder.p-listening{background:#1d4fbf;color:#fff}
+.skill-folder.p-speaking{background:#11a865;color:#fff}
+.skill-folder.p-reading{background:#fbc74b;color:#16141c}
+.skill-folder.p-writing{background:#c62f8b;color:#fff}
 .skill-folder:is(.p-listening,.p-speaking,.p-writing) a{color:#fff}
 .skill-folder.p-reading a{color:#16141c}
 .skill-folder .mini-task{background:#ffffff26;border-radius:16px;padding:14px;margin-top:12px}
