@@ -375,9 +375,10 @@ html[data-smh-theme="dark"] .smh-name b+b{color:#ffd21f}
 }
 @media (max-width:385px){.smh-header{--logo:38px}}
 /* theme button: in the header on tablet and computer; on phone hub pages it sits in the band */
-.smh-band .smh-theme-band{display:none}
+.smh-foot-theme{display:none}
 @media (max-width:640px){
-  html.smh-shell:not(.smh-focus) body:not([data-page-id="home"]) .smh-header .smh-theme:not(.smh-theme-band){display:none}
-  html.smh-shell:not(.smh-focus) .smh-band .smh-theme-band{display:inline-flex;min-height:36px!important;min-width:36px!important;box-shadow:0 2px 0 var(--f-fg)!important;border-width:1.5px!important;flex:none}
-  html.smh-shell:not(.smh-focus) .smh-band .smh-theme-band svg{width:16px;height:16px}
+  html.smh-shell:not(.smh-focus) body:not([data-page-id="home"]) .smh-header .smh-theme:not(.smh-theme-foot){display:none}
+  html.smh-shell:not(.smh-focus) body:not([data-page-id="home"]) .smh-foot-theme{display:block;grid-column:1/-1}
+  .smh-foot-theme .smh-theme{color:#fff!important;border-color:#fff!important;box-shadow:0 3px 0 #fff!important;background:transparent!important;padding:0 16px!important}
+  .smh-foot-theme .smh-theme span{display:inline!important}
 }
