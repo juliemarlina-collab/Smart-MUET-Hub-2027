@@ -24,3 +24,9 @@
 .skill-folder h3{font-size:30px!important}
 
 .hero-collage{background:transparent!important;border-radius:0!important;min-height:0!important}.hero-collage::before{display:none!important}.hero-collage img{max-height:290px!important}
+
+/* eBook photography: compact, clean mobile hero, no stickers over faces */
+.hero-collage{padding:0!important;overflow:hidden;border-radius:22px!important;min-height:0!important;aspect-ratio:16/10;background:transparent!important}
+.hero-collage::before,.hero-collage .floating-label,.hero-collage .hero-star,.hero-collage .corner-note{display:none!important}
+.hero-collage img{width:100%!important;height:100%!important;max-height:none!important;object-fit:cover!important;animation:none!important;display:block}
+@media(max-width:700px){.guide-hero{gap:20px!important}.hero-collage{margin-top:0!important;aspect-ratio:16/9!important;max-width:100%!important}}
