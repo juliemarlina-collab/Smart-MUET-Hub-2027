@@ -1,6 +1,7 @@
 /* Smart MUET Hub · shared shell.
-   Builds the same header, page band and footer on every page, keeps each page's own working buttons
-   (Pause motion, Use 2D view, Sound on) by moving them into the band, and hides the old per-page header/footer.
+   Builds the same header, page band and footer on every page and hides the old per-page header/footer.
+   Motion always plays and the 3D view is always used (no Pause motion / Use 2D view buttons);
+   only the Arcade's Sound button is kept, in the band. Visitors who ask their device for reduced motion still get it.
    Loaded by shared/js/navigation.js. */
 (() => {
   'use strict';
@@ -8,6 +9,13 @@
   const THEME_KEY = 'smh.theme';
   const readTheme = () => { try { return localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : 'light'; } catch { return 'light'; } };
   document.documentElement.dataset.smhTheme = readTheme();
+  /* motion on, 3D view on: clear old saved "paused" choices and keep the page classes off */
+  try { localStorage.removeItem('smh.rebuild.motionPaused'); } catch {}
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const strip = () => { const c = document.documentElement.classList; ['no-motion', 'motion-paused', 'flat'].forEach(k => c.contains(k) && c.remove(k)); };
+    strip();
+    new MutationObserver(strip).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
   const body = document.body, root = body.dataset.appRoot || '../', id = body.dataset.pageId || '';
 
   // id: [crumbs, type, exit (activity pages), tab, code]
@@ -78,7 +86,7 @@
 
   /* old frame: keep its working buttons, its skip link and its back link */
   const oldHeader = document.querySelector('body>header:not(.smh-header)');
-  const tools = oldHeader ? [...oldHeader.querySelectorAll('button')] : [];
+  const tools = oldHeader ? [...oldHeader.querySelectorAll('button#sound')] : [];
   const oldSkip = document.querySelector('a.skip, a[class*="skip"]');
   const oldBack = oldHeader && [...oldHeader.querySelectorAll('a')].find(a => /←/.test(a.textContent));
   const mainTarget = document.querySelector('main[id]') || document.querySelector('main');
@@ -88,7 +96,7 @@
   const hin = el('div', 'in');
   const logo = link('', 'index.html', 'smh-logo');
   const img = el('img'); img.src = root + 'shared/assets/logo.svg'; img.alt = '';
-  const words = el('span'); words.append(el('b', '', 'Smart MUET Hub'), el('small', '', 'MUET 2027 · POLIPD'));
+  const words = el('span', 'smh-name'); words.append(el('b', '', 'Smart MUET'), el('b', '', 'Hub'));
   logo.append(img, words); logo.setAttribute('aria-label', 'Smart MUET Hub home');
   hin.append(logo);
 
@@ -109,7 +117,9 @@
   }
   /* theme setting: light (default) or dark, remembered on this device */
   const tbtn = el('button', 'smh-theme'); tbtn.type = 'button';
-  const paintTheme = () => {
+  const tbtn2 = el('button', 'smh-theme smh-theme-band'); tbtn2.type = 'button';
+  const paintTheme = () => { paintOne(tbtn); paintOne(tbtn2); };
+  const paintOne = tbtn => {
     const dark = document.documentElement.dataset.smhTheme === 'dark';
     tbtn.innerHTML = dark
       ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Light</span>'
@@ -117,15 +127,30 @@
     tbtn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     tbtn.title = tbtn.getAttribute('aria-label');
   };
-  tbtn.addEventListener('click', () => {
+  const flip = () => {
     const next = document.documentElement.dataset.smhTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.smhTheme = next;
     try { localStorage.setItem(THEME_KEY, next); } catch {}
     paintTheme();
-  });
+  };
+  tbtn.addEventListener('click', flip);
+  tbtn2.addEventListener('click', flip);
   paintTheme();
   const endBtn = hin.querySelector('.smh-cta, .smh-exit');
   hin.insertBefore(tbtn, endBtn);
+  /* Back: the page you came from on this site, otherwise one level up */
+  if (id !== 'home') {
+    const up = crumbs.length > 1 && crumbs[crumbs.length - 2][1] ? crumbs[crumbs.length - 2][1] : 'index.html';
+    const back = link('', up, 'smh-back');
+    back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Back</span>';
+    back.setAttribute('aria-label', 'Go back');
+    back.addEventListener('click', e => {
+      let same = false;
+      try { same = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch {}
+      if (same && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+    hin.insertBefore(back, tbtn);
+  }
   header.append(hin);
 
   /* ---------- band ---------- */
@@ -142,6 +167,7 @@
     bin.append(c);
     if (tools.length) { const t = el('div', 'smh-tools'); tools.forEach(b => t.append(b)); bin.append(t); }
     if (code) bin.append(el('span', 'code', code));
+    if (type !== 'activity') bin.append(tbtn2); // phone: the theme button moves here so the header fits
     band.append(bin);
   }
 
